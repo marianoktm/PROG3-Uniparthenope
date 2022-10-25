@@ -1,0 +1,1 @@
+SELECT uid FROM twitterdb.user WHERE username = ?

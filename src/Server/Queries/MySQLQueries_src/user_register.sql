@@ -1,0 +1,1 @@
+INSERT INTO twitterdb.user (username, email, password) VALUES (?, ?, ?)
