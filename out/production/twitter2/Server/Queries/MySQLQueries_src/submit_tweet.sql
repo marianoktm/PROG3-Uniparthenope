@@ -1,0 +1,1 @@
+INSERT INTO twitterdb.tweets (uid, message, hashtag) VALUES (?, ?, ?)

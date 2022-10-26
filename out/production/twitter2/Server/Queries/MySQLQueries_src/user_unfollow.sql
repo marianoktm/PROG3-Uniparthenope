@@ -1,0 +1,1 @@
+DELETE FROM twitterdb.follows WHERE uid_a = ? AND uid_b = ?

@@ -1,0 +1,1 @@
+select * from twitterdb.user where username = ?
