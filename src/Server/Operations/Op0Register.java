@@ -4,11 +4,11 @@ import Server.Auth.RegisterHandler;
 import Server.Queries.QueriesAdapter.QueryFetchAdapter;
 import Server.Queries.QueryClasses.GetUserDataQuery;
 import Server.Queries.QueryClasses.MySQLQueryCommand;
-import Server.Queries.QueryClasses.UserRegisterQuery;
-import Shared.Packet;
+import Shared.ErrorHandling.ErrorCode;
+import Shared.ErrorHandling.Exceptions.InvalidSessionException;
+import Shared.Packet.Packet;
 
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Op0Register extends OperationCommand {
@@ -20,7 +20,9 @@ public class Op0Register extends OperationCommand {
     }
 
     @Override
-    public Packet execute() {
+    public Packet execute() throws InvalidSessionException {
+        sessionIsValid(packet);
+
         String username = (String) packet.data.get(0);
 
         MySQLQueryCommand checkUserExists = new GetUserDataQuery(username);
@@ -30,14 +32,15 @@ public class Op0Register extends OperationCommand {
 
         List<?> result = checkUserExistsAdpt.execute();
         if (result.isEmpty()) {
-            response.bool = true;
+            response.isSuccessful = true;
 
             RegisterHandler handler = RegisterHandler.getInstance();
 
             handler.register(((String) packet.data.get(0)),(String) packet.data.get(1), (String) packet.data.get(2));
         }
         else {
-            response.bool = false;
+            response.isSuccessful = false;
+            response.errorCode = ErrorCode.REGISTER_USER_EXISTS;
         }
 
         return response;

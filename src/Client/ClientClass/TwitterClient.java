@@ -1,13 +1,9 @@
 package Client.ClientClass;
 
 import Client.Misc.ServerRecord;
-import Shared.Packet;
-import Shared.PacketHelper;
-import com.google.gson.Gson;
+import Shared.Packet.Packet;
+import Shared.Packet.PacketHelper;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.net.Socket;
 
 public class TwitterClient {
