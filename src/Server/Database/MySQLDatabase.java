@@ -1,9 +1,7 @@
 package Server.Database;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 public class MySQLDatabase implements Database {
     private static final MySQLDatabase instance = new MySQLDatabase();
@@ -26,18 +24,20 @@ public class MySQLDatabase implements Database {
     /* PRIVATE UTILITIES */
 
     private Connection createConnection() {
+        Connection result = null;
         Connection connection = null;
 
         // Get connection from driver manager
-        if (connectionUrl == null) return null;
-
-        try {
-            connection = DriverManager.getConnection(connectionUrl, dbUser, dbPass);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (connectionUrl != null) {
+            try {
+                connection = DriverManager.getConnection(connectionUrl, dbUser, dbPass);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            result = connection;
         }
 
-        return connection;
+        return result;
     }
 
     private PreparedStatement prepareStatementHelper(Connection connection, String queryStr, List<Object> queryParameters) {
@@ -62,8 +62,12 @@ public class MySQLDatabase implements Database {
             e.printStackTrace();
         }
 
-        try { System.out.println(statement.toString()); }
-        catch (NullPointerException e) { e.printStackTrace(); }
+        if (statement != null) {
+            String queryPrint = statement.toString();
+            System.out.println(queryPrint);
+        }
+        else
+            System.err.println("Statement is null!!!");
 
         return statement;
     }

@@ -1,0 +1,1 @@
+SELECT * FROM twitterdb.tweets WHERE hashtag = ? ORDER BY post_date DESC LIMIT ?

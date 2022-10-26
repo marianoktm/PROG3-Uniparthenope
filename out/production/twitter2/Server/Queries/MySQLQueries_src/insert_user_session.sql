@@ -1,0 +1,1 @@
+INSERT INTO twitterdb.users_sessions (UID, SESSION_KEY) VALUES (?, ?)

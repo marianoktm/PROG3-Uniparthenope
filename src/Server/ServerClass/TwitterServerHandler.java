@@ -1,21 +1,14 @@
 package Server.ServerClass;
 
-import Server.Database.MySQLDatabase;
 import Server.Operations.Op0Register;
 import Server.Operations.OperationCommand;
-import Server.Queries.QueriesAdapter.QueryFetchAdapter;
-import Server.Queries.QueryClasses.GetUserDataQuery;
-import Server.Queries.QueryClasses.MySQLQueryCommand;
-import Shared.Packet;
-import Shared.PacketHelper;
-import com.google.gson.Gson;
+import Shared.ErrorHandling.ErrorCode;
+import Shared.ErrorHandling.Exceptions.InvalidSessionException;
+import Shared.Packet.Packet;
+import Shared.Packet.PacketHelper;
+import Shared.Packet.Session;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 
 class TwitterServerHandler extends Thread {
     private final Socket clientSocket;
@@ -31,8 +24,7 @@ class TwitterServerHandler extends Thread {
         System.out.println("Connection by client: " + clientSocket.getInetAddress());
 
         packet = getPacket();
-
-
+        operation(packet);
     }
 
     private void sendPacket(Packet to_send) {
@@ -45,12 +37,22 @@ class TwitterServerHandler extends Thread {
 
     private void operation(Packet packet) {
         OperationCommand op;
+        Packet response = packet.clone();
 
-        switch (packet.request) {
-            case 0: // register
-                op = new Op0Register(clientSocket, packet);
-                op.execute();
-
+        try {
+            switch (packet.request) {
+                case 0: // register
+                    op = new Op0Register(clientSocket, packet);
+                    response = op.execute();
+            }
+        }
+        catch (InvalidSessionException e) {
+            e.printStackTrace();
+            response.isSuccessful = false;
+            response.errorCode = ErrorCode.SESSION_NOT_FOUND;
+        }
+        finally {
+            sendPacket(response);
         }
     }
 }

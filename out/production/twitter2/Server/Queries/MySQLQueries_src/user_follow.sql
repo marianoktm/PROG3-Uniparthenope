@@ -1,0 +1,1 @@
+INSERT INTO twitterdb.follows (uid_a, uid_b) VALUES (?, ?)

@@ -1,12 +1,10 @@
-package Shared;
+package Shared.Packet;
 
-import Client.Misc.ClientConfig;
 import com.google.gson.Gson;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.net.Socket;
 
 public class PacketHelper {

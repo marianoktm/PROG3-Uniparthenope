@@ -1,10 +1,6 @@
 package Server.ServerClass;
 
-import java.io.OutputStream;
 import java.net.ServerSocket;
-import java.net.Socket;
-
-import Shared.Packet;
 
 public class TwitterServer {
     private static final TwitterServer instance = new TwitterServer();
