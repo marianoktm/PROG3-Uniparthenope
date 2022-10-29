@@ -4,6 +4,7 @@ import Client.Misc.ServerRecord;
 import Shared.Packet.Packet;
 import Shared.Packet.PacketHelper;
 
+import java.io.IOException;
 import java.net.Socket;
 
 public class TwitterClient {
@@ -47,7 +48,7 @@ public class TwitterClient {
         packetHelper.sendPacket(to_send);
     }
 
-    public Packet getPacket() {
+    public Packet getPacket() throws IOException {
         return packetHelper.getPacket();
     }
 }

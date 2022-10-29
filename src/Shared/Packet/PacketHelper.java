@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.Socket;
 
 public class PacketHelper {
@@ -27,18 +28,14 @@ public class PacketHelper {
         }
     }
 
-    public Packet getPacket() {
-        String JSONToGet = null;
+    public Packet getPacket() throws IOException {
+        String jsonToGet;
 
-        try {
-            DataInputStream dataIn = new DataInputStream(clientSocket.getInputStream());
-            JSONToGet = dataIn.readUTF();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+        InputStream inputStream = clientSocket.getInputStream();
+        DataInputStream dataIn = new DataInputStream(inputStream);
+        jsonToGet = dataIn.readUTF();
 
         Gson gson = new Gson();
-        return gson.fromJson(JSONToGet, Packet.class);
+        return gson.fromJson(jsonToGet, Packet.class);
     }
 }

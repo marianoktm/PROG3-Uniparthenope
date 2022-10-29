@@ -111,14 +111,14 @@ public class MySQLDatabase implements Database {
     /* QUERY */
 
     @Override
-    public Object execQuery(String queryStr, List<Object> queryParameters) {
+    public Object execQuery(String queryStr, List<Object> queryParameters) throws SQLException {
         // Declaring JDBC resources
         Connection connection = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
 
         // Query result (function output)
-        ArrayList<ArrayList<String>> out = new ArrayList<ArrayList<String>>();
+        ArrayList<ArrayList<String>> out;
 
         try {
             // Opening DB connection and initialize a prepared statement
@@ -129,8 +129,9 @@ public class MySQLDatabase implements Database {
             resultSet = statement.executeQuery();
 
             out = convertResultSet(resultSet);
-        } catch (Exception exception) {
+        } catch (SQLException exception) {
             exception.printStackTrace();
+            throw exception;
         } finally {
             // Releasing all JDBC resources
             try {
@@ -146,18 +147,18 @@ public class MySQLDatabase implements Database {
     }
 
     @Override
-    public Object execQuery(String queryStr) {
+    public Object execQuery(String queryStr) throws SQLException {
         return execQuery(queryStr, null);
     }
 
     /* UPDATE (insert, delete, update) */
 
     @Override
-    public int execUpdate(String queryStr, List<Object> queryParameters) {
+    public int execUpdate(String queryStr, List<Object> queryParameters) throws SQLException {
         // Declaring JDBC resources
         Connection connection = null;
         PreparedStatement statement = null;
-        int updated_no = 0;
+        int updated_no;
 
         try {
             // Opening DB connection and initialize a prepared statement
@@ -168,6 +169,7 @@ public class MySQLDatabase implements Database {
             updated_no = statement.executeUpdate();
         } catch (Exception exception) {
             exception.printStackTrace();
+            throw exception;
         } finally {
             // Releasing all JDBC resources
             try {
@@ -181,7 +183,7 @@ public class MySQLDatabase implements Database {
     }
 
     @Override
-    public int execUpdate(String queryStr) {
+    public int execUpdate(String queryStr) throws SQLException {
         return execUpdate(queryStr, null);
     }
 }

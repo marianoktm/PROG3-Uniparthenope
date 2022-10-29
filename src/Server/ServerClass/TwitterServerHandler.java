@@ -1,18 +1,19 @@
 package Server.ServerClass;
 
-import Server.Operations.Op0Register;
-import Server.Operations.OperationCommand;
+import Server.Operations.OperationFacade;
 import Shared.ErrorHandling.ErrorCode;
-import Shared.ErrorHandling.Exceptions.InvalidSessionException;
+import Shared.ErrorHandling.Exceptions.InvalidTwitterOpException;
+import Shared.ErrorHandling.Exceptions.SessionException;
 import Shared.Packet.Packet;
 import Shared.Packet.PacketHelper;
-import Shared.Packet.Session;
 
+import java.io.IOException;
 import java.net.Socket;
+import java.sql.SQLException;
 
 class TwitterServerHandler extends Thread {
     private final Socket clientSocket;
-    private PacketHelper packetHelper;
+    private final PacketHelper packetHelper;
 
     public TwitterServerHandler(Socket socket) {
             this.clientSocket = socket;
@@ -20,40 +21,63 @@ class TwitterServerHandler extends Thread {
     }
 
     public void run() {
-        Packet packet;
         System.out.println("Connection by client: " + clientSocket.getInetAddress());
 
-        packet = getPacket();
-        operation(packet);
+        boolean didPacketRead;
+        do didPacketRead = operation(); while (didPacketRead);
+
+        System.out.println("Connection closed by client: " + clientSocket.getInetAddress());
+
     }
 
     private void sendPacket(Packet to_send) {
         packetHelper.sendPacket(to_send);
     }
 
-    private Packet getPacket() {
+    private Packet getPacket() throws IOException {
         return packetHelper.getPacket();
     }
 
-    private void operation(Packet packet) {
-        OperationCommand op;
-        Packet response = packet.clone();
+    private boolean operation() {
+        Packet packet;
+        Packet response;
 
         try {
-            switch (packet.request) {
-                case 0: // register
-                    op = new Op0Register(clientSocket, packet);
-                    response = op.execute();
-            }
+            packet = getPacket();
+            response = packet.clone();
+        } catch (IOException e) {
+            return false;
         }
-        catch (InvalidSessionException e) {
+
+        // Operation handling
+        OperationFacade chain = OperationFacade.getInstance();
+        try {
+            response = chain.fulfillRequest(clientSocket, packet);
+        }
+        catch (SessionException e) {
             e.printStackTrace();
             response.isSuccessful = false;
-            response.errorCode = ErrorCode.SESSION_NOT_FOUND;
+            response.errorCode = ErrorCode.SESSION_ERROR;
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            response.isSuccessful = false;
+            response.errorCode = ErrorCode.DB_SQL_ERROR;
+        }
+        catch (InvalidTwitterOpException e) {
+            e.printStackTrace();
+            response.isSuccessful = false;
+            response.errorCode = ErrorCode.INVALID_REQUEST;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            response.isSuccessful = false;
+            response.errorCode = ErrorCode.GENERIC_ERROR;
         }
         finally {
             sendPacket(response);
         }
+        return true;
     }
 }
 

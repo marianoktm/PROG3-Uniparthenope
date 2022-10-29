@@ -1,10 +1,10 @@
 package Server.Auth;
 
 public abstract class LoginCommand {
-    protected LoginHandler loginHandler;
+    protected LoginHandler1 loginHandler1;
 
     LoginCommand() {
-        loginHandler = LoginHandler.getInstance();
+        loginHandler1 = LoginHandler1.getInstance();
     }
 
     public abstract boolean execute();

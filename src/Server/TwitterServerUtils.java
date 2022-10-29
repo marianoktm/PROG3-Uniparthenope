@@ -4,11 +4,13 @@ import Server.Database.Database;
 import Server.Database.MySQLDatabase;
 import Server.Queries.QueriesHandler;
 import Server.ServerClass.TwitterServer;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.UUID;
 
 public class TwitterServerUtils {
     public static void print2DArrayList(ArrayList<ArrayList<String>> list) {
@@ -54,5 +56,15 @@ public class TwitterServerUtils {
         catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static String sessionKeyGenerator() {
+        UUID random1 = UUID.randomUUID();
+        UUID random2 = UUID.randomUUID();
+        UUID random3 = UUID.randomUUID();
+
+        String to_digest = random1.toString() + random2.toString() + random3.toString();
+
+        return DigestUtils.md5Hex(to_digest);
     }
 }

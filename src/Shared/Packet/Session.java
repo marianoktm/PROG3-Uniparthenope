@@ -10,5 +10,11 @@ public class Session {
         this.username = username;
         this.uid = uid;
     }
+
+    public Session(Session session) {
+        this.session_key = session.session_key;
+        this.username = session.username;
+        this.uid = session.uid;
+    }
 }
 
