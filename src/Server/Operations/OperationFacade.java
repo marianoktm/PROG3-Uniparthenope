@@ -1,9 +1,6 @@
 package Server.Operations;
 
-import Server.Operations.OpChain.LoginHandler;
-import Server.Operations.OpChain.OperationChain;
-import Server.Operations.OpChain.RegisterHandler;
-import Server.Operations.OpChain.UserFollowHandler;
+import Server.Operations.OpChain.*;
 import Shared.ErrorHandling.Exceptions.InvalidTwitterOpException;
 import Shared.ErrorHandling.Exceptions.SessionException;
 import Shared.Packet.Packet;
@@ -46,6 +43,14 @@ public class OperationFacade {
         // User Follow
         OperationChain userFollow = new UserFollowHandler();
         userLogin.setNextChain(userFollow);
+
+        // Submit Tweet
+        OperationChain submitTweet = new SubmitTweetHandler();
+        userFollow.setNextChain(submitTweet);
+
+        // User Fetch Followed Tweets
+        OperationChain fetchTweetHandler = new FetchTweetHandler();
+        submitTweet.setNextChain(fetchTweetHandler);
 
 
         // Return chain head

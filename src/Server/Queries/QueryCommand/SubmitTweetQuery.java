@@ -6,12 +6,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubmitTweet extends MySQLQueryCommand {
+public class SubmitTweetQuery extends MySQLQueryCommand {
     private final String hashtag;
     private final String message;
     private final String uid;
 
-    public SubmitTweet(String hashtag, String message, String username) throws SQLException {
+    public SubmitTweetQuery(String hashtag, String message, String username) throws SQLException {
         this.hashtag = hashtag;
         this.message = message;
 
@@ -23,13 +23,18 @@ public class SubmitTweet extends MySQLQueryCommand {
 
     @Override
     public Object execute() throws SQLException {
-        String query = queriesHandler.getQuery("submit_tweet.sql");
+        String query;
         List<Object> queryParameters = new ArrayList<>();
 
         queryParameters.add(uid);
         queryParameters.add(message);
-        queryParameters.add(hashtag);
 
+        if (hashtag != null) {
+            query = queriesHandler.getQuery("submit_tweet.sql");
+            queryParameters.add(hashtag);
+        }
+        else
+            query = queriesHandler.getQuery("submit_tweet_nohashtag.sql");
 
         return db.execUpdate(query, queryParameters);
     }

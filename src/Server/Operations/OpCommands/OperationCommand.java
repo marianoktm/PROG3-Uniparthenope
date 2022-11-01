@@ -21,6 +21,9 @@ public abstract class OperationCommand {
     public abstract Packet execute() throws SessionException, SQLException;
 
     protected static boolean sessionIsValid(Packet packet) throws SessionException, SQLException {
+        if (packet.session == null)
+            throw new SessionException("The session is not valid!");
+
         Session session = packet.session;
         MySQLQueryCommand mySQLQueryCommand = new GetUserSessionQuery(session.uid, session.session_key);
         QueryFetchAdapter queryFetchAdapter = new QueryFetchAdapter(mySQLQueryCommand);

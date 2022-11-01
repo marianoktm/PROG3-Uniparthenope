@@ -13,5 +13,6 @@ public enum ErrorCode {
     NO_PARAMETERS,
     USER_NOT_FOUND,
     ALREADY_FOLLOWING,
-
+    SUBMIT_TWEET_ERROR,
+    FETCH_TWEETS_ERROR
 }

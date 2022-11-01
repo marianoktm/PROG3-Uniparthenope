@@ -28,13 +28,10 @@ public class UserFollowOperation extends OperationCommand{
         Packet response = packet.clone();
 
         // Get following id
-        MySQLQueryCommand followingQuery = new GetUIDQuery((String) packet.data.get(0));
-        QueryOneResultAdapter followingQueryAdpt = new QueryOneResultAdapter(followingQuery);
-
-        String following_id = followingQueryAdpt.execute();
+        String following_id = packet.session.uid;
 
         // Get followed id
-        MySQLQueryCommand followedQuery = new GetUIDQuery((String) packet.data.get(1));
+        MySQLQueryCommand followedQuery = new GetUIDQuery((String) packet.data.get(0));
         QueryOneResultAdapter followedQueryAdpt = new QueryOneResultAdapter(followedQuery);
 
         String followed_id = followedQueryAdpt.execute();

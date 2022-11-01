@@ -125,6 +125,8 @@ public class MySQLDatabase implements Database {
             connection = createConnection();
             statement = prepareStatementHelper(connection, queryStr, queryParameters);
 
+            System.out.println(">> Trying to execute: [" + statement.toString() + "]");
+
             // Executing the query and retrieving its metadata
             resultSet = statement.executeQuery();
 

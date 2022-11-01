@@ -4,12 +4,12 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 public class ClientConfig {
-    private String configFilePath;
     private Properties prop;
 
     public ClientConfig(String[] args) {
             // Set config path
-            if (args.length == 0)
+        String configFilePath;
+        if (args.length == 0)
                 configFilePath = "src/client/client_config.properties";
             else
                 configFilePath = args[0];
