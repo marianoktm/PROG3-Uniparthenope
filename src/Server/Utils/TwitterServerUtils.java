@@ -1,4 +1,4 @@
-package Server;
+package Server.Utils;
 
 import Server.Database.Database;
 import Server.Database.MySQLDatabase;

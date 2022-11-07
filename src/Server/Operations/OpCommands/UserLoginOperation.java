@@ -5,7 +5,7 @@ import Server.Queries.QueryAdapter.QueryUpdateAdapter;
 import Server.Queries.QueryCommand.GetUserDataQuery;
 import Server.Queries.QueryCommand.InsertUserSessionQuery;
 import Server.Queries.QueryCommand.MySQLQueryCommand;
-import Server.TwitterServerUtils;
+import Server.Utils.TwitterServerUtils;
 import Shared.ErrorHandling.ErrorCode;
 import Shared.ErrorHandling.Exceptions.SessionException;
 import Shared.Packet.Packet;

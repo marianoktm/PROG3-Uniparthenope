@@ -17,8 +17,9 @@ public class ClientMain {
         ClientConfig config = new ClientConfig(args);
         TwitterClient client = new TwitterClient(config.getServerRecord());
 
-        if (test(client)) System.out.println("EVERYTHING WORKS!");
+        // if (test(client)) System.out.println("EVERYTHING WORKS!");
     }
+
 
     private static boolean test(TwitterClient client) throws IOException {
         client.connect();
