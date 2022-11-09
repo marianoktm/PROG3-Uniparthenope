@@ -34,4 +34,12 @@ public class StageFacade {
     public static void closeStageFromBtn(Button button) {
         ((Stage) button.getScene().getWindow()).close();
     }
+
+    public static String getFXMLCompletePath(String fxmlName) {
+        return FXML_PATH + fxmlName + FXML_EXT;
+    }
+
+    public static FXMLLoader getLoader(String fxmlName) {
+        return new FXMLLoader(StageFacade.class.getResource(getFXMLCompletePath(fxmlName)));
+    }
 }

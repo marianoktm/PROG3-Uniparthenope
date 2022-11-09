@@ -1,4 +1,4 @@
-package Client.Misc;
+package Client.JavaFXGUI.GUIObjects;
 
 public final class Tweet {
     public String username;
@@ -11,5 +11,10 @@ public final class Tweet {
         this.hashtag = hashtag;
         this.message = message;
         this.datetime = datetime;
+    }
+
+    @Override
+    public String toString() {
+        return username + "\n" + hashtag + "\n" + message + "\n" + datetime;
     }
 }
