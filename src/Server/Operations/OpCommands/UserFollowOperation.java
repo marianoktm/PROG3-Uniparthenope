@@ -11,6 +11,7 @@ import Shared.Packet.Packet;
 
 import java.net.Socket;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 public class UserFollowOperation extends OperationCommand{
     private final Packet packet;
@@ -48,13 +49,15 @@ public class UserFollowOperation extends OperationCommand{
         QueryUpdateAdapter followQueryAdpt = new QueryUpdateAdapter(followQuery);
 
         // If execution of query returns 0, record already in table so "following" already follows "followed".
-        if (followQueryAdpt.execute() == 0) {
+        try {
+            followQueryAdpt.execute();
+            response.isSuccessful = true;
+        }
+        catch (SQLIntegrityConstraintViolationException e) {
             response.isSuccessful = false;
             response.errorCode = ErrorCode.ALREADY_FOLLOWING;
         }
-        else {
-            response.isSuccessful = true;
-        }
+
         return response;
     }
 }

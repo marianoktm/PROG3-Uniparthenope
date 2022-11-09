@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="276.0" prefWidth="436.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.JavaFXGUI.Controllers.UserRegisterController">
+   <children>
+      <Button fx:id="submitRegisterBtn" defaultButton="true" layoutX="182.0" layoutY="197.0" mnemonicParsing="false" onAction="#submitRegisterBtnClick" text="Register" />
+      <VBox layoutX="83.0" layoutY="74.0" prefHeight="129.0" prefWidth="271.0" spacing="15.0">
+         <children>
+            <TextField fx:id="usernameField" promptText="username" />
+            <TextField fx:id="emailField" promptText="email" />
+            <PasswordField fx:id="passwordField" promptText="password" />
+         </children>
+      </VBox>
+      <Button fx:id="loginInsteadBtn" layoutX="97.0" layoutY="237.0" mnemonicParsing="false" onAction="#loginInsteadBtnClick" text="Already have an account? Login instead!" />
+      <Label alignment="CENTER" layoutX="179.0" layoutY="26.0" text="Register" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

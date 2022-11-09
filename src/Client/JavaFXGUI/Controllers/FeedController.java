@@ -1,5 +1,6 @@
 package Client.JavaFXGUI.Controllers;
 
+import Client.JavaFXGUI.Classes.StageFacade;
 import Client.Misc.Tweet;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
-import java.util.ArrayList;
+import java.io.IOException;
 
 public class FeedController {
 
@@ -35,32 +36,27 @@ public class FeedController {
 
     @FXML
     void followSomeoneBtnClick(ActionEvent event) {
+        System.out.println("Follow Someone Button Clicked");
 
+        try { new StageFacade("Follow", "Follow").show(); }
+        catch (IOException e) { e.printStackTrace();}
     }
 
     @FXML
     void logOutBtnClick(ActionEvent event) {
-
+        System.out.println("Log Out Button Clicked.");
     }
 
     @FXML
     void submitTweetBtnClick(ActionEvent event) {
+        System.out.println("Submit Tweet Button Clicked");
 
+        try { new StageFacade("SubmitTweet", "Submit Tweet").show(); }
+        catch (IOException e) { e.printStackTrace();}
     }
 
     @FXML
     void updateTweetsBtnClick(ActionEvent event) {
-
-    }
-
-    // Test
-    private ArrayList<Tweet> tweetCreator() {
-        ArrayList<Tweet> tweetArrayList = new ArrayList<>();
-
-        for (int i = 0; i < 15; i++) {
-            tweetArrayList.add(new Tweet("username", Integer.toString(i), "MESSAGE!!!!", "20 oct bla bla"));
-        }
-
-        return tweetArrayList;
+        System.out.println("Update Tweets Button Clicked.");
     }
 }

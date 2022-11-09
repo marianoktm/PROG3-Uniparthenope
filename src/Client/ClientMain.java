@@ -13,9 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClientMain {
-    public static void main(String[] args) throws IOException {
+    ClientMain(String[] args) {
         ClientConfig config = new ClientConfig(args);
         TwitterClient client = new TwitterClient(config.getServerRecord());
+    }
+
+    public static void main(String[] args) throws IOException {
+
 
         // if (test(client)) System.out.println("EVERYTHING WORKS!");
     }

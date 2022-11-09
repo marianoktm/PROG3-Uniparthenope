@@ -33,6 +33,9 @@ public class HomeController {
     void registerBtnClick(ActionEvent event) {
         System.out.println("Register Button Clicked.");
 
+        try { new StageFacade("UserRegister", "Register").show(); }
+        catch (IOException e) { e.printStackTrace(); }
+
         StageFacade.closeStageFromBtn(registerBtn);
     }
 

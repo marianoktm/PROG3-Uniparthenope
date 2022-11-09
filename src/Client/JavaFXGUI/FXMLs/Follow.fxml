@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Follow"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="230.0" prefWidth="368.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.JavaFXGUI.Controllers.FollowController">
+   <children>
+      <Label alignment="CENTER" layoutX="85.0" layoutY="23.0" prefHeight="30.0" prefWidth="199.0" text="Follow Someone">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="followField" layoutX="81.0" layoutY="82.0" prefHeight="25.0" prefWidth="207.0" promptText="Who do you want to follow?" />
+      <HBox alignment="CENTER" layoutX="84.0" layoutY="132.0" prefHeight="80.0" prefWidth="200.0" spacing="15.0">
+         <children>
+            <Button fx:id="submitFollowBtn" defaultButton="true" mnemonicParsing="false" onAction="#submitFollowBtnClick" prefHeight="44.0" prefWidth="75.0" text="Follow" />
+            <Button fx:id="cancelBtn" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#cancelBtnClick" prefHeight="44.0" prefWidth="75.0" text="Cancel" />
+         </children>
+      </HBox>
+   </children>
 </AnchorPane>

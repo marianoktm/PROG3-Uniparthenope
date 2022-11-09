@@ -5,7 +5,6 @@ import Shared.Packet.Packet;
 import Shared.Packet.PacketHelper;
 
 import java.io.IOException;
-import java.net.ConnectException;
 import java.net.Socket;
 
 public class TwitterClient {
@@ -22,32 +21,15 @@ public class TwitterClient {
         System.out.println("Port:" + srv_port);
     }
 
-    public void connect() {
-        try {
-            clientSocket = new Socket(srv_ip, srv_port);
-            packetHelper = new PacketHelper(clientSocket);
-        }
-        catch (ConnectException e) {
-            e.printStackTrace();
-            System.out.println("Connection fail!");
-            return;
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            return;
-        }
+    public void connect() throws IOException {
+        clientSocket = new Socket(srv_ip, srv_port);
+        packetHelper = new PacketHelper(clientSocket);
 
         System.out.println("Connected.");
     }
 
-    public void disconnect() {
-        try {
-            clientSocket.close();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-
+    public void disconnect() throws IOException {
+        clientSocket.close();
         System.out.println("Disconnected.");
     }
 

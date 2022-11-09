@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="362.0" prefWidth="349.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.JavaFXGUI.Controllers.UserLoginController">
    <children>
-      <Button id="submitLoginButton" fx:id="submitLoginBtn" layoutX="134.0" layoutY="313.0" mnemonicParsing="false" onAction="#submitBtnClick" prefHeight="35.0" prefWidth="81.0" text="Login" />
+      <Button id="submitLoginButton" fx:id="submitLoginBtn" defaultButton="true" layoutX="135.0" layoutY="238.0" mnemonicParsing="false" onAction="#submitBtnClick" prefHeight="35.0" prefWidth="81.0" text="Login" />
       <TextField id="usernameField" fx:id="usernameField" layoutX="90.0" layoutY="112.0" prefHeight="35.0" prefWidth="170.0" promptText="Username" />
       <PasswordField id="passwordField" fx:id="passwordField" layoutX="90.0" layoutY="153.0" prefHeight="35.0" prefWidth="170.0" promptText="Password" />
+      <Label alignment="CENTER" layoutX="143.0" layoutY="14.0" prefHeight="59.0" prefWidth="64.0" text="Login" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="registerInsteadBtn" layoutX="97.0" layoutY="305.0" mnemonicParsing="false" onAction="#registerInsteadBtnClick" text="Newcomer? Register then!" />
    </children>
 </AnchorPane>

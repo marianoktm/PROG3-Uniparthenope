@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="SubmitTweet"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.JavaFXGUI.Controllers.SubmitTweetController">
+   <children>
+      <TextArea fx:id="messageField" layoutX="86.0" layoutY="138.0" prefHeight="177.0" prefWidth="428.0" promptText="What are you going to say to the world?" />
+      <TextField fx:id="hashtagField" layoutX="86.0" layoutY="105.0" promptText="hashtag" />
+      <Label alignment="CENTER" layoutX="237.0" layoutY="33.0" text="Submit tweet">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER" layoutX="200.0" layoutY="330.0" prefHeight="56.0" prefWidth="200.0" spacing="15.0">
+         <children>
+            <Button fx:id="submitTweetBtn" defaultButton="true" mnemonicParsing="false" onAction="#submitTweetBtnClick" prefHeight="33.0" prefWidth="89.0" text="Submit" />
+            <Button fx:id="cancelBtn" cancelButton="true" mnemonicParsing="false" onAction="#cancelBtnClick" prefHeight="33.0" prefWidth="89.0" text="Cancel" />
+         </children>
+      </HBox>
+   </children>
 </AnchorPane>
