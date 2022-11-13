@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 
 public class FeedController extends ConnectedUIController {
+
     @FXML
     protected Button btn1;
 
@@ -93,6 +94,8 @@ public class FeedController extends ConnectedUIController {
         ArrayList<Tweet> to_add = listOfListsToTweetArray((ArrayList<ArrayList<String>>) fetchTweetsResult.data);
 
         URL tweetFXMLUrl = getClass().getResource(StageFacade.getFXMLCompletePath("Tweet"));
+
+        tweetVBox.getChildren().clear();
 
         for (Tweet tweet : to_add) {
             FXMLLoader tweetLoader = new FXMLLoader(tweetFXMLUrl);

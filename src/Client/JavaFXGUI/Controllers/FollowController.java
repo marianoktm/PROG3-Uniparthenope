@@ -7,35 +7,19 @@ import Shared.Packet.Packet;
 import Shared.Packet.RequestCode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FollowController extends ConnectedUIController {
+public class FollowController extends TargetUserOperationController {
 
     @FXML
-    private Button cancelBtn;
+    @Override
+    protected void submitBtnClick(ActionEvent event) throws IOException, FollowException {
+        System.out.println("Submit Clicked.");
 
-    @FXML
-    private TextField followField;
-
-    @FXML
-    private Button submitFollowBtn;
-
-    @FXML
-    void cancelBtnClick(ActionEvent event) {
-        System.out.println("Cancel Button Clicked.");
-        StageFacade.closeStageFromBtn(cancelBtn);
-    }
-
-    @FXML
-    void submitFollowBtnClick(ActionEvent event) throws IOException, FollowException {
-        System.out.println("Submit Follow Clicked.");
-
-        String toFollow = followField.getText();
+        String toFollow = usernameField.getText();
 
         List<String> packetData = new ArrayList<>();
         packetData.add(toFollow);
@@ -44,12 +28,12 @@ public class FollowController extends ConnectedUIController {
         Packet followResult = getAndDisconnect();
 
         if (followResult.isSuccessful) {
-            System.out.println("Tweet submit success!");
+            System.out.println("User follow success!");
 
             String successMessage = toFollow + " followed!";
             PopUpWrapper.showDialog2("Success", successMessage);
 
-            StageFacade.closeStageFromBtn(submitFollowBtn);
+            StageFacade.closeStageFromBtn(submitBtn);
         }
         else {
             switch (followResult.errorCode) {
@@ -58,6 +42,13 @@ public class FollowController extends ConnectedUIController {
                 default -> throw new FollowException("An unknown error occurred trying to follow. Retry later...");
             }
         }
+    }
+
+    @Override
+    public void init() {
+        this.usernameField.setPromptText("Who do you want to follow?");
+        this.submitBtn.setText("Follow!");
+        this.title.setText("Follow Someone");
     }
 
 }

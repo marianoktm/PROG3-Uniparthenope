@@ -21,6 +21,10 @@ public class AdminFeedController extends FeedController {
     // Delete User
     protected void btn1Click(ActionEvent event) {
         System.out.println("Delete user clicked.");
+
+        TargetUserOperationController deleteUserController = new DeleteUserController();
+        PopUpWrapper.setControllerAndShowStage("TargetUserOperation", "Follow", deleteUserController);
+        deleteUserController.init();
     }
 
     @FXML

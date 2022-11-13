@@ -21,7 +21,10 @@ public class UserFeedController extends FeedController {
     // Follow Someone
     protected void btn1Click(ActionEvent event) {
         System.out.println("Follow Someone Button Clicked");
-        PopUpWrapper.showStage("Follow", "Follow");
+
+        TargetUserOperationController followController = new FollowController();
+        PopUpWrapper.setControllerAndShowStage("TargetUserOperation", "Follow", followController);
+        followController.init();
     }
 
     @FXML

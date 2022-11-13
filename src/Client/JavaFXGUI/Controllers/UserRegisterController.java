@@ -71,7 +71,7 @@ public class UserRegisterController extends ConnectedUIController {
 
                 String successMessage = "Register success! Now login.";
 
-                PopUpWrapper.showStage("UserLogin", "Login");
+                PopUpWrapper.showStage("Login", "Login");
 
                 PopUpWrapper.showDialog2("Success", successMessage);
 
