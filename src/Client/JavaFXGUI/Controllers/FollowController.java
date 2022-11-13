@@ -1,9 +1,7 @@
 package Client.JavaFXGUI.Controllers;
 
-import Client.JavaFXGUI.Classes.DialogStage;
-import Client.JavaFXGUI.Classes.Home;
+import Client.JavaFXGUI.Classes.PopUpWrapper;
 import Client.JavaFXGUI.Classes.StageFacade;
-import Shared.ErrorHandling.ErrorCode;
 import Shared.ErrorHandling.Exceptions.FollowException;
 import Shared.Packet.Packet;
 import Shared.Packet.RequestCode;
@@ -16,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FollowController {
+public class FollowController extends ConnectedUIController {
 
     @FXML
     private Button cancelBtn;
@@ -39,25 +37,17 @@ public class FollowController {
 
         String toFollow = followField.getText();
 
-        List<String> followData = new ArrayList<>();
-        followData.add(toFollow);
+        List<String> packetData = new ArrayList<>();
+        packetData.add(toFollow);
 
-        Packet followPacket = new Packet(RequestCode.USER_FOLLOW, Home.session, followData, null, ErrorCode.NONE);
-
-
-        Home.client.connect();
-        Home.client.sendPacket(followPacket);
-
-        Packet followResult = Home.client.getPacket();
-        Home.client.disconnect();
+        sendSessionedPacket(RequestCode.USER_FOLLOW, packetData);
+        Packet followResult = getAndDisconnect();
 
         if (followResult.isSuccessful) {
             System.out.println("Tweet submit success!");
 
             String successMessage = toFollow + " followed!";
-
-            try { new DialogStage("Dialog", "Success", successMessage).show(); }
-            catch (IOException ex) { ex.printStackTrace(); }
+            PopUpWrapper.showDialog2("Success", successMessage);
 
             StageFacade.closeStageFromBtn(submitFollowBtn);
         }

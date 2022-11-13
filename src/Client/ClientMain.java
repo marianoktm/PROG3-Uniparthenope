@@ -1,7 +1,7 @@
 package Client;
 
 import Client.ClientClass.TwitterClient;
-import Client.Misc.ClientConfig;
+import Client.ClientClass.ClientConfig;
 import Client.Misc.TwitterClientUtils;
 import Shared.ErrorHandling.ErrorCode;
 import Shared.Packet.Packet;
@@ -15,7 +15,7 @@ import java.util.List;
 public class ClientMain {
     ClientMain(String[] args) {
         ClientConfig config = new ClientConfig(args);
-        TwitterClient client = new TwitterClient(config.getServerRecord());
+        //TwitterClient client = new TwitterClient(config.getServerRecord());
     }
 
     public static void main(String[] args) throws IOException {

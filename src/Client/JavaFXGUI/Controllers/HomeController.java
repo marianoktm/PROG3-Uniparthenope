@@ -1,13 +1,12 @@
 package Client.JavaFXGUI.Controllers;
 
+import Client.JavaFXGUI.Classes.PopUpWrapper;
 import Client.JavaFXGUI.Classes.StageFacade;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-import java.io.IOException;
-
-public class HomeController {
+public class HomeController implements Controller {
 
     public HomeController() {
         System.out.println("HomeController instantiated.");
@@ -23,8 +22,7 @@ public class HomeController {
     void loginBtnClick(ActionEvent event) {
         System.out.println("Login Button Clicked.");
 
-        try { new StageFacade("UserLogin", "Login").show(); }
-        catch (IOException e) { e.printStackTrace(); }
+        PopUpWrapper.showStage("Login", "Login");
 
         StageFacade.closeStageFromBtn(loginBtn);
     }
@@ -33,8 +31,7 @@ public class HomeController {
     void registerBtnClick(ActionEvent event) {
         System.out.println("Register Button Clicked.");
 
-        try { new StageFacade("UserRegister", "Register").show(); }
-        catch (IOException e) { e.printStackTrace(); }
+        PopUpWrapper.showStage("UserRegister", "Register");
 
         StageFacade.closeStageFromBtn(registerBtn);
     }

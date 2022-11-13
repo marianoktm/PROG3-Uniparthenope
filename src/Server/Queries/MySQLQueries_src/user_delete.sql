@@ -1,0 +1,1 @@
+DELETE FROM twitterdb.users WHERE UID = ?;

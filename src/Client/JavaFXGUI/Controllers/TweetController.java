@@ -1,11 +1,9 @@
 package Client.JavaFXGUI.Controllers;
 
-import Client.JavaFXGUI.GUIObjects.Tweet;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 
-public class TweetController extends ListCell<Tweet> {
+public class TweetController implements Controller {
 
     @FXML
     private Label dateField;

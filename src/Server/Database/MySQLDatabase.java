@@ -10,9 +10,6 @@ public class MySQLDatabase implements Database {
     private String dbUser;
     private String dbPass;
 
-    private String dbAdmin = null;
-    private String dbAdminPass = null;
-
     private MySQLDatabase() {
         if (instance != null) throw new InstantiationError("Creating this object is not allowed.");
     }

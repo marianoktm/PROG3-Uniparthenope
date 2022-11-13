@@ -1,9 +1,7 @@
 package Client.JavaFXGUI.Controllers;
 
-import Client.JavaFXGUI.Classes.DialogStage;
-import Client.JavaFXGUI.Classes.Home;
+import Client.JavaFXGUI.Classes.PopUpWrapper;
 import Client.JavaFXGUI.Classes.StageFacade;
-import Shared.ErrorHandling.ErrorCode;
 import Shared.ErrorHandling.Exceptions.SubmitTweetException;
 import Shared.Packet.Packet;
 import Shared.Packet.RequestCode;
@@ -17,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubmitTweetController {
+public class SubmitTweetController extends ConnectedUIController {
 
     @FXML
     private Button cancelBtn;
@@ -43,25 +41,19 @@ public class SubmitTweetController {
 
         if (message.length() > 140) throw new SubmitTweetException("Your tweet is too long! Max 140 chars!");
 
-        List<String> tweetData = new ArrayList<>();
-        tweetData.add(hashtag);
-        tweetData.add(message);
+        List<String> packetData = new ArrayList<>();
+        packetData.add(hashtag);
+        packetData.add(message);
 
-        Packet tweetPacket = new Packet(RequestCode.SUBMIT_TWEET, Home.session, tweetData, null, ErrorCode.NONE);
-
-        Home.client.connect();
-        Home.client.sendPacket(tweetPacket);
-
-        Packet tweetResult = Home.client.getPacket();
-        Home.client.disconnect();
+        sendSessionedPacket(RequestCode.SUBMIT_TWEET, packetData);
+        Packet tweetResult = getAndDisconnect();
 
         if (tweetResult.isSuccessful) {
             System.out.println("Tweet submit success!");
 
             String successMessage = "Tweet submitted!";
 
-            try { new DialogStage("Dialog", "Success", successMessage).show(); }
-            catch (IOException ex) { ex.printStackTrace(); }
+            PopUpWrapper.showDialog2("Success", successMessage);
 
             StageFacade.closeStageFromBtn(submitTweetBtn);
         }

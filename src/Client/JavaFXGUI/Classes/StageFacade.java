@@ -1,6 +1,8 @@
 package Client.JavaFXGUI.Classes;
 
+import Client.JavaFXGUI.Controllers.Controller;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -27,8 +29,27 @@ public class StageFacade {
         STAGE.setScene(new Scene(LOADER.load()));
     }
 
+    public StageFacade(String fxmlName, String windowName, Controller controller) throws IOException {
+        String fxmlToLoad = FXML_PATH + fxmlName + FXML_EXT;
+        System.out.println("Trying to load fxml: " + fxmlToLoad);
+
+        LOADER = new FXMLLoader(getClass().getResource(fxmlToLoad));
+
+        setController(controller);
+        Parent root = LOADER.load();
+
+        STAGE = new Stage();
+
+        STAGE.setTitle("Twitter 2 " + windowName);
+        STAGE.setScene(new Scene(root));
+    }
+
     public void show() {
         STAGE.show();
+    }
+
+    public void setController(Controller controller) {
+        LOADER.setController(controller);
     }
 
     public static void closeStageFromBtn(Button button) {

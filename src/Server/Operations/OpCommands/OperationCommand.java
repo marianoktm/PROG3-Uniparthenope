@@ -1,6 +1,7 @@
 package Server.Operations.OpCommands;
 
 import Server.Queries.QueryAdapter.QueryFetchAdapter;
+import Server.Queries.QueryCommand.GetAdminSessionQuery;
 import Server.Queries.QueryCommand.GetUserSessionQuery;
 import Server.Queries.QueryCommand.MySQLQueryCommand;
 import Shared.ErrorHandling.Exceptions.SessionException;
@@ -32,7 +33,24 @@ public abstract class OperationCommand {
         fetchedSession = queryFetchAdapter.execute();
 
         if (fetchedSession == null)
+            throw new SessionException("Session invalid or Expired.");
+        else
+            return true;
+    }
+
+    protected static boolean adminSessionIsValid(Packet packet) throws SessionException, SQLException {
+        if (packet.session == null)
             throw new SessionException("The session is not valid!");
+
+        Session session = packet.session;
+        MySQLQueryCommand mySQLQueryCommand = new GetAdminSessionQuery(session.uid, session.session_key);
+        QueryFetchAdapter queryFetchAdapter = new QueryFetchAdapter(mySQLQueryCommand);
+
+        ArrayList<ArrayList<String>> fetchedSession;
+        fetchedSession = queryFetchAdapter.execute();
+
+        if (fetchedSession == null)
+            throw new SessionException("Session invalid or Expired.");
         else
             return true;
     }

@@ -1,0 +1,1 @@
+SELECT * FROM twitterdb.admins_sessions WHERE admin_id = ? and session_key = ?;

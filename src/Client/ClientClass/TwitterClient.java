@@ -3,17 +3,30 @@ package Client.ClientClass;
 import Client.Misc.ServerRecord;
 import Shared.Packet.Packet;
 import Shared.Packet.PacketHelper;
+import Shared.Packet.Session;
 
 import java.io.IOException;
 import java.net.Socket;
 
 public class TwitterClient {
-    private Socket clientSocket;
-    String srv_ip;
-    int srv_port;
-    PacketHelper packetHelper;
+    private static final TwitterClient instance = new TwitterClient();
 
-    public TwitterClient(ServerRecord server) {
+    private Socket clientSocket;
+    private String srv_ip;
+    private int srv_port;
+    private PacketHelper packetHelper;
+
+    private Session session = new Session();
+
+    TwitterClient() {
+        if (instance != null) throw new InstantiationError("Creating this object is not allowed.");
+    }
+
+    public static TwitterClient getInstance() {
+        return instance;
+    }
+
+    public void init(ServerRecord server) {
         this.srv_ip = server.ip();
         this.srv_port = server.port();
 
@@ -39,5 +52,17 @@ public class TwitterClient {
 
     public Packet getPacket() throws IOException {
         return packetHelper.getPacket();
+    }
+
+    public PacketHelper getPacketHelper() {
+        return this.packetHelper;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public Session getSession() {
+        return this.session;
     }
 }

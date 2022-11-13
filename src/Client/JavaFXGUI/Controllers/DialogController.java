@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class DialogController {
+public class DialogController implements Controller {
 
     public DialogController() {
         System.out.println("DialogController instantiated.");

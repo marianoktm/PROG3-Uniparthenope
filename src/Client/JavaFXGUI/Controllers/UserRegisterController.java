@@ -1,9 +1,7 @@
 package Client.JavaFXGUI.Controllers;
 
-import Client.JavaFXGUI.Classes.DialogStage;
-import Client.JavaFXGUI.Classes.Home;
+import Client.JavaFXGUI.Classes.PopUpWrapper;
 import Client.JavaFXGUI.Classes.StageFacade;
-import Shared.ErrorHandling.ErrorCode;
 import Shared.ErrorHandling.Exceptions.RegisterException;
 import Shared.Packet.Packet;
 import Shared.Packet.RequestCode;
@@ -17,7 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserRegisterController {
+public class UserRegisterController extends ConnectedUIController {
 
     @FXML
     private TextField emailField;
@@ -36,8 +34,7 @@ public class UserRegisterController {
 
     @FXML
     void loginInsteadBtnClick(ActionEvent event) {
-        try { new StageFacade("UserLogin", "Login").show(); }
-        catch (IOException e) { e.printStackTrace(); }
+        PopUpWrapper.showStage("UserLogin", "Login");
 
         StageFacade.closeStageFromBtn(loginInsteadBtn);
     }
@@ -52,42 +49,31 @@ public class UserRegisterController {
         System.out.println("Got email: " + email);
         System.out.println("Got password: " + password);
 
-
         if (username.isEmpty() || password.isEmpty() || email.isEmpty()) {
             System.out.println("Provide username, email and password!.");
-
             throw new RegisterException("You must fill both username and password fields!");
         } else {
             System.out.println("Username and Password are both not empty.");
 
-            // Data lenght check before sending to server
-            if (username.length() > 25) throw new RegisterException("Username must be 25 chars or less!");
-            if (password.length() < 8) throw new RegisterException("Password must be at least 8 chars long!");
-            if (email.length() > 255) throw new RegisterException("255 char email is too long!");
+            // Data length check before sending to server
+            checkData(password, username, email);
 
-            List<String> registerData = new ArrayList<>();
-            registerData.add(username);
-            registerData.add(email);
-            registerData.add(password);
+            List<String> packetData = new ArrayList<>();
+            packetData.add(username);
+            packetData.add(email);
+            packetData.add(password);
 
-            Packet registerPacket = new Packet(RequestCode.USER_REGISTER, Home.session, registerData, null, ErrorCode.NONE);
-
-            Home.client.connect();
-            Home.client.sendPacket(registerPacket);
-
-            Packet registerResult = Home.client.getPacket();
-            Home.client.disconnect();
+            sendSessionlessPacket(RequestCode.USER_REGISTER, packetData);
+            Packet registerResult = getAndDisconnect();
 
             if (registerResult.isSuccessful) {
                 System.out.println("Register successful!");
 
                 String successMessage = "Register success! Now login.";
 
-                try { new StageFacade("UserLogin", "Login").show(); }
-                catch (IOException e) { e.printStackTrace();}
+                PopUpWrapper.showStage("UserLogin", "Login");
 
-                try { new DialogStage("Dialog", "Success", successMessage).show(); }
-                catch (IOException ex) { ex.printStackTrace(); }
+                PopUpWrapper.showDialog2("Success", successMessage);
 
                 StageFacade.closeStageFromBtn(submitRegisterBtn);
             } else {
@@ -99,5 +85,11 @@ public class UserRegisterController {
                 }
             }
         }
+    }
+
+    private void checkData(String password, String username, String email) throws RegisterException {
+        if (username.length() > 25) throw new RegisterException("Username must be 25 chars or less!");
+        if (password.length() < 8) throw new RegisterException("Password must be at least 8 chars long!");
+        if (email.length() > 255) throw new RegisterException("255 char email is too long!");
     }
 }

@@ -1,14 +1,15 @@
 package Client.JavaFXGUI.Controllers;
 
-import Client.JavaFXGUI.Classes.Home;
+import Client.ClientClass.TwitterClientWrapper;
+import Client.JavaFXGUI.Classes.PopUpWrapper;
 import Client.JavaFXGUI.Classes.StageFacade;
-import Shared.ErrorHandling.ErrorCode;
 import Shared.ErrorHandling.Exceptions.LoginException;
 import Shared.Packet.Packet;
 import Shared.Packet.RequestCode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -16,11 +17,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserLoginController {
+public class LoginController extends ConnectedUIController {
 
-    public UserLoginController() {
+    public LoginController() {
         System.out.println("UserLoginController instantiated.");
     }
+
+    @FXML
+    private CheckBox isAdminCheck;
 
     @FXML
     private PasswordField passwordField;
@@ -46,47 +50,54 @@ public class UserLoginController {
 
         if (username.isEmpty() || password.isEmpty()) {
             System.out.println("Username or password are empty.");
-
             throw new LoginException("You must fill both username and password fields!");
         }
         else {
             System.out.println("Username and Password are both not empty.");
 
-            List<String> loginData = new ArrayList<>();
-            loginData.add(username);
-            loginData.add(password);
+            List<String> packetData = new ArrayList<>();
+            packetData.add(username);
+            packetData.add(password);
 
-            Packet loginPacket = new Packet(RequestCode.USER_LOGIN, Home.session, loginData, null, ErrorCode.NONE);
+            if (isAdminCheck.isSelected()) // ADMIN LOGIN
+                sendSessionlessPacket(RequestCode.ADMIN_LOGIN, packetData);
+            else // USER LOGIN
+                sendSessionlessPacket(RequestCode.USER_LOGIN, packetData);
 
-            Home.client.connect();
-            Home.client.sendPacket(loginPacket);
-
-            Packet loginResult = Home.client.getPacket();
-            Home.client.disconnect();
+            Packet loginResult = getAndDisconnect();
 
             if (loginResult.isSuccessful) {
                 System.out.println("Login success! New session generated.");
-                Home.session = loginResult.session;
+                TwitterClientWrapper.setSession(loginResult.session);
                 System.out.println("Session data: ");
-                System.out.println(Home.session);
+                System.out.println(TwitterClientWrapper.getSession());
 
-                try { new StageFacade("Feed", "Feed").show(); }
-                catch (IOException e) { e.printStackTrace(); }
+                FeedController feedController;
+                String feedWindowName;
+                if (isAdminCheck.isSelected()) { // Open Admin Feed
+                    feedController = new AdminFeedController();
+                    feedWindowName = "Admin Feed";
+                }
+                else { // Open User Feed
+                    feedController = new UserFeedController();
+                    feedWindowName = "Feed";
+                }
+
+                PopUpWrapper.setControllerAndShowStage("Feed", feedWindowName, feedController);
+                feedController.init();
 
                 StageFacade.closeStageFromBtn(submitLoginBtn);
             }
             else {
-                System.out.println("Invalid credentials.");
-                throw new LoginException("Invalid credentials! Try again.");
+                System.out.println("No login.");
+                throw new LoginException("Login error. Error code: " + loginResult.errorCode);
             }
         }
     }
 
     @FXML
     void registerInsteadBtnClick(ActionEvent event) {
-        try { new StageFacade("UserRegister", "Register").show(); }
-        catch (IOException e) { e.printStackTrace(); }
-
+        PopUpWrapper.showStage("UserRegister", "Register");
         StageFacade.closeStageFromBtn(registerInsteadBtn);
     }
 

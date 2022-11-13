@@ -1,0 +1,1 @@
+DELETE FROM twitterdb.admins_sessions WHERE ADMIN_ID = ? AND SESSION_KEY = ?;

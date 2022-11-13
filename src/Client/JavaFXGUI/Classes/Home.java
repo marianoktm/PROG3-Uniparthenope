@@ -1,9 +1,7 @@
 package Client.JavaFXGUI.Classes;
 
-import Client.ClientClass.TwitterClient;
-import Client.Misc.ClientConfig;
+import Client.ClientClass.ClientConfig;
 import Client.Misc.TwitterClientUtils;
-import Shared.Packet.Session;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -15,13 +13,11 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Home extends Application {
-    public static TwitterClient client;
-    public static Session session = new Session(null, null, null);
+    // public static TwitterClient client;
+    // public static Session session = new Session(null, null, null);
 
     public static void main(String[] args) {
         ClientConfig config = new ClientConfig(args);
-        client = new TwitterClient(config.getServerRecord());
-
         launch(args);
     }
 

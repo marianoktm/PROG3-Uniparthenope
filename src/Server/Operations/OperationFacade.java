@@ -32,7 +32,7 @@ public class OperationFacade {
 
         // Chain building
 
-        // Register
+        // User Register
         OperationChain register = new RegisterHandler();
         chain.setNextChain(register);
 
@@ -52,6 +52,25 @@ public class OperationFacade {
         OperationChain fetchTweetHandler = new FetchTweetHandler();
         submitTweet.setNextChain(fetchTweetHandler);
 
+        // User Logout
+        OperationChain userLogoutHandler = new UserLogoutHandler();
+        fetchTweetHandler.setNextChain(userLogoutHandler);
+
+        // Admin Login
+        OperationChain adminLoginHandler = new AdminLoginHandler();
+        userLogoutHandler.setNextChain(adminLoginHandler);
+
+        // Admin Delete User
+        OperationChain adminDeleteUserHandler = new AdminDeleteUserHandler();
+        adminLoginHandler.setNextChain(adminDeleteUserHandler);
+
+        // Fetch Tweet By Hashtag
+        OperationChain fetchTweetByHashtagHandler = new FetchTweetByHashtagHandler();
+        adminDeleteUserHandler.setNextChain(fetchTweetByHashtagHandler);
+
+        // Admin Logout
+        OperationChain adminLogoutHandler = new AdminLogoutHandler();
+        fetchTweetByHashtagHandler.setNextChain(adminLogoutHandler);
 
         // Return chain head
         return chain;
