@@ -1,5 +1,6 @@
 package Server.Operations.OpChain;
 
+import Shared.ErrorHandling.Exceptions.BanException;
 import Shared.ErrorHandling.Exceptions.InvalidTwitterOpException;
 import Shared.ErrorHandling.Exceptions.SessionException;
 import Shared.Packet.Packet;
@@ -15,7 +16,7 @@ public abstract class OperationChain {
         this.next = next;
     }
 
-    public abstract Packet perform(Socket socket, Packet packet) throws SessionException, SQLException, InvalidTwitterOpException;
+    public abstract Packet perform(Socket socket, Packet packet) throws SessionException, SQLException, InvalidTwitterOpException, BanException;
 
     protected boolean canHandle(Packet packet, RequestCode requestCode) {
         return packet.request == requestCode;

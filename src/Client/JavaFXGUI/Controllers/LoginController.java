@@ -90,7 +90,7 @@ public class LoginController extends ConnectedUIController {
             }
             else {
                 System.out.println("No login.");
-                throw new LoginException("Login error. Error code: " + loginResult.errorCode);
+                throw new LoginException("Login error... " + loginResult.errorCode);
             }
         }
     }

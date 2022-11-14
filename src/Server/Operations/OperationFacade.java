@@ -1,6 +1,7 @@
 package Server.Operations;
 
 import Server.Operations.OpChain.*;
+import Shared.ErrorHandling.Exceptions.BanException;
 import Shared.ErrorHandling.Exceptions.InvalidTwitterOpException;
 import Shared.ErrorHandling.Exceptions.SessionException;
 import Shared.Packet.Packet;
@@ -24,7 +25,7 @@ public class OperationFacade {
         // Anonymous class for chain head
         class ChainHead extends OperationChain {
             @Override
-            public Packet perform(Socket socket, Packet packet) throws SessionException, SQLException, InvalidTwitterOpException {return next.perform(socket, packet); }
+            public Packet perform(Socket socket, Packet packet) throws SessionException, SQLException, InvalidTwitterOpException, BanException {return next.perform(socket, packet); }
         }
 
         // Chain head initialization
@@ -76,7 +77,7 @@ public class OperationFacade {
         return chain;
     }
 
-    public Packet fulfillRequest(Socket socket, Packet packet) throws SessionException, SQLException, InvalidTwitterOpException {
+    public Packet fulfillRequest(Socket socket, Packet packet) throws SessionException, SQLException, InvalidTwitterOpException, BanException {
         return chain.perform(socket, packet);
     }
 }

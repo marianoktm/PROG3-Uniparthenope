@@ -1,6 +1,7 @@
 package Server.Operations.OpChain;
 
 import Server.Operations.OpCommands.UserFollowOperation;
+import Shared.ErrorHandling.Exceptions.BanException;
 import Shared.ErrorHandling.Exceptions.InvalidTwitterOpException;
 import Shared.ErrorHandling.Exceptions.SessionException;
 import Shared.Packet.Packet;
@@ -13,7 +14,7 @@ public class UserFollowHandler extends OperationChain {
     private final RequestCode requestCode = RequestCode.USER_FOLLOW;
 
     @Override
-    public Packet perform(Socket socket, Packet packet) throws SessionException, SQLException, InvalidTwitterOpException {
+    public Packet perform(Socket socket, Packet packet) throws SessionException, SQLException, InvalidTwitterOpException, BanException {
         if (canHandle(packet, requestCode))
             return (new UserFollowOperation(socket, packet)).execute();
         else if (next != null)

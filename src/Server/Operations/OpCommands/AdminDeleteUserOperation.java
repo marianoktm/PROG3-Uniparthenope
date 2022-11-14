@@ -1,8 +1,9 @@
 package Server.Operations.OpCommands;
 
-import Server.Queries.QueryAdapter.QueryOneResultAdapter;
-import Server.Queries.QueryCommand.GetUIDQuery;
+import Server.Queries.QueryAdapter.QueryUpdateAdapter;
 import Server.Queries.QueryCommand.MySQLQueryCommand;
+import Server.Queries.QueryCommand.SubmitTweetQuery;
+import Server.Queries.QueryCommand.UserDeleteQuery;
 import Shared.ErrorHandling.ErrorCode;
 import Shared.ErrorHandling.Exceptions.SessionException;
 import Shared.Packet.Packet;
@@ -24,18 +25,30 @@ public class AdminDeleteUserOperation extends OperationCommand {
 
         String username = (String) packet.data.get(0);
 
-        MySQLQueryCommand getUid = new GetUIDQuery(username);
-        QueryOneResultAdapter getUidAdpt = new QueryOneResultAdapter(getUid);
-
-        String to_delete = getUidAdpt.execute();
+        MySQLQueryCommand userDelete = new UserDeleteQuery(username);
+        QueryUpdateAdapter userDeleteAdpt = new QueryUpdateAdapter(userDelete);
 
         Packet response = packet.clone();
-        if (to_delete == null) {
+        if (userDeleteAdpt.execute() == 0) {
             response.isSuccessful = false;
             response.errorCode = ErrorCode.USER_NOT_FOUND;
         }
         else {
             response.isSuccessful = true;
+
+            String hashtag = "ADMIN";
+            String message = "This user was banned by an admin.";
+
+            MySQLQueryCommand tweetInsert = new SubmitTweetQuery(hashtag, message, username);
+            QueryUpdateAdapter tweetInsertAdpt = new QueryUpdateAdapter(tweetInsert);
+
+            if (tweetInsertAdpt.execute() != 0) {
+                response.isSuccessful = true;
+            }
+            else {
+                response.isSuccessful = false;
+                response.errorCode = ErrorCode.SUBMIT_TWEET_ERROR;
+            }
         }
 
         return response;

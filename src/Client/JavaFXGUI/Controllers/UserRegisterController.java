@@ -34,7 +34,7 @@ public class UserRegisterController extends ConnectedUIController {
 
     @FXML
     void loginInsteadBtnClick(ActionEvent event) {
-        PopUpWrapper.showStage("UserLogin", "Login");
+        PopUpWrapper.showStage("Login", "Login");
 
         StageFacade.closeStageFromBtn(loginInsteadBtn);
     }

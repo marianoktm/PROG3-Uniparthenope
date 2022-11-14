@@ -12,7 +12,7 @@ public class QueryOneRowAdapter {
         this.fetch = new QueryFetchAdapter(command);
     }
 
-    public ArrayList<String> execute() throws SQLException {
+    public ArrayList<?> execute() throws SQLException {
         ArrayList<ArrayList<String>> out;
         out = fetch.execute();
 

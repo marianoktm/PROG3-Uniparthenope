@@ -4,6 +4,7 @@ import Server.Queries.QueryAdapter.QueryFetchAdapter;
 import Server.Queries.QueryCommand.GetAdminSessionQuery;
 import Server.Queries.QueryCommand.GetUserSessionQuery;
 import Server.Queries.QueryCommand.MySQLQueryCommand;
+import Shared.ErrorHandling.Exceptions.BanException;
 import Shared.ErrorHandling.Exceptions.SessionException;
 import Shared.Packet.Packet;
 import Shared.Packet.Session;
@@ -19,7 +20,7 @@ public abstract class OperationCommand {
         this.socket = socket;
     }
 
-    public abstract Packet execute() throws SessionException, SQLException;
+    public abstract Packet execute() throws SessionException, SQLException, BanException;
 
     protected static boolean sessionIsValid(Packet packet) throws SessionException, SQLException {
         if (packet.session == null)

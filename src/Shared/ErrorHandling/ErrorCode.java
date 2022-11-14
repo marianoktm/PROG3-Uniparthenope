@@ -17,5 +17,6 @@ public enum ErrorCode {
     FETCH_TWEETS_ERROR,
     ADMIN_NOT_FOUND,
     ADMIN_WRONG_PASSWORD,
-    LOGOUT_ERROR
+    LOGOUT_ERROR,
+    BANNED
 }

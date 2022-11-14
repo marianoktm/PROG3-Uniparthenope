@@ -7,6 +7,7 @@ import Server.Queries.QueryCommand.InsertUserSessionQuery;
 import Server.Queries.QueryCommand.MySQLQueryCommand;
 import Server.Utils.TwitterServerUtils;
 import Shared.ErrorHandling.ErrorCode;
+import Shared.ErrorHandling.Exceptions.BanException;
 import Shared.ErrorHandling.Exceptions.SessionException;
 import Shared.Packet.Packet;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -24,7 +25,7 @@ public class UserLoginOperation extends OperationCommand {
     }
 
     @Override
-    public Packet execute() throws SQLException, SessionException {
+    public Packet execute() throws SQLException, SessionException, BanException {
         Packet response = packet.clone();
 
         // data 0 = username, data 1 = password
@@ -41,6 +42,13 @@ public class UserLoginOperation extends OperationCommand {
             response.errorCode = ErrorCode.LOGIN_USER_NOT_FOUND;
         }
         else {
+            //is banned?
+            if (result.get(5).equals("t")) {
+                response.isSuccessful = false;
+                response.errorCode = ErrorCode.BANNED;
+                throw new BanException("The user is banned!");
+            }
+
             String passwordHash = DigestUtils.sha256Hex(password);
             // get 2 = password, IF PASSWORDS ARE EQUALS THEN LOGIN!
             if (result.get(2).equals(passwordHash)) {

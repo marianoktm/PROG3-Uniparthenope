@@ -2,6 +2,7 @@ package Server.ServerClass;
 
 import Server.Operations.OperationFacade;
 import Shared.ErrorHandling.ErrorCode;
+import Shared.ErrorHandling.Exceptions.BanException;
 import Shared.ErrorHandling.Exceptions.InvalidTwitterOpException;
 import Shared.ErrorHandling.Exceptions.SessionException;
 import Shared.Packet.Packet;
@@ -53,6 +54,11 @@ class TwitterServerHandler extends Thread {
         OperationFacade chain = OperationFacade.getInstance();
         try {
             response = chain.fulfillRequest(clientSocket, packet);
+        }
+        catch (BanException e) {
+            e.printStackTrace();
+            response.isSuccessful = false;
+            response.errorCode = ErrorCode.BANNED;
         }
         catch (SessionException e) {
             e.printStackTrace();
