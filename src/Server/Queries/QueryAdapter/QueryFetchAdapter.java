@@ -5,13 +5,23 @@ import Server.Queries.QueryCommand.MySQLQueryCommand;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ *
+ */
 public class QueryFetchAdapter {
     private final MySQLQueryCommand command;
 
+    /**
+     * @param command
+     */
     public QueryFetchAdapter(MySQLQueryCommand command) {
         this.command = command;
     }
 
+    /**
+     * @return
+     * @throws SQLException
+     */
     public ArrayList<ArrayList<String>> execute() throws SQLException {
         Iterable<?> queryResult = (Iterable<?>) command.execute();
         ArrayList<ArrayList<String>> out = new ArrayList<>();

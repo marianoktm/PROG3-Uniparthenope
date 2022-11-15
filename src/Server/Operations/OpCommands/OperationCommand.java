@@ -13,15 +13,33 @@ import java.net.Socket;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ *
+ */
 public abstract class OperationCommand {
     protected Socket socket;
 
+    /**
+     * @param socket
+     */
     OperationCommand(Socket socket) {
         this.socket = socket;
     }
 
+    /**
+     * @return
+     * @throws SessionException
+     * @throws SQLException
+     * @throws BanException
+     */
     public abstract Packet execute() throws SessionException, SQLException, BanException;
 
+    /**
+     * @param packet
+     * @return
+     * @throws SessionException
+     * @throws SQLException
+     */
     protected static boolean sessionIsValid(Packet packet) throws SessionException, SQLException {
         if (packet.session == null)
             throw new SessionException("The session is not valid!");
@@ -39,6 +57,12 @@ public abstract class OperationCommand {
             return true;
     }
 
+    /**
+     * @param packet
+     * @return
+     * @throws SessionException
+     * @throws SQLException
+     */
     protected static boolean adminSessionIsValid(Packet packet) throws SessionException, SQLException {
         if (packet.session == null)
             throw new SessionException("The session is not valid!");

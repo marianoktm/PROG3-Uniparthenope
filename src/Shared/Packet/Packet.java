@@ -5,6 +5,9 @@ import Shared.ErrorHandling.ErrorCode;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ */
 public class Packet implements Cloneable {
     public RequestCode request;
     public Session session;
@@ -12,6 +15,13 @@ public class Packet implements Cloneable {
     public Boolean isSuccessful;
     public ErrorCode errorCode;
 
+    /**
+     * @param request
+     * @param session
+     * @param data
+     * @param isSuccessful
+     * @param errorCode
+     */
     public Packet(RequestCode request, Session session, List<?> data, Boolean isSuccessful, ErrorCode errorCode) {
         this.request = request;
         this.session = session;
@@ -20,6 +30,9 @@ public class Packet implements Cloneable {
         this.errorCode = errorCode;
     }
 
+    /**
+     * @return
+     */
     @Override
     public Packet clone() {
         try {
@@ -42,6 +55,9 @@ public class Packet implements Cloneable {
         }
     }
 
+    /**
+     * @return
+     */
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();

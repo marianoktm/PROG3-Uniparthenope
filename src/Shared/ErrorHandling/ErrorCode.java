@@ -1,5 +1,8 @@
 package Shared.ErrorHandling;
 
+/**
+ *
+ */
 public enum ErrorCode {
     NONE,
     GENERIC_ERROR,

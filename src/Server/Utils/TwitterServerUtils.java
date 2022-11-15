@@ -12,7 +12,13 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.util.UUID;
 
+/**
+ *
+ */
 public class TwitterServerUtils {
+    /**
+     * @param list
+     */
     public static void print2DArrayList(ArrayList<ArrayList<String>> list) {
         for (ArrayList<String> row : list) {
             for (String element : row) {
@@ -22,6 +28,9 @@ public class TwitterServerUtils {
         }
     }
 
+    /**
+     * @param args
+     */
     public static void configHelper(String[] args) {
         // Load config file
         String configFilePath;
@@ -58,6 +67,9 @@ public class TwitterServerUtils {
         }
     }
 
+    /**
+     * @return
+     */
     public static String sessionKeyGenerator() {
         UUID random1 = UUID.randomUUID();
         UUID random2 = UUID.randomUUID();

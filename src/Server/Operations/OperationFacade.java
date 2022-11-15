@@ -9,18 +9,30 @@ import Shared.Packet.Packet;
 import java.net.Socket;
 import java.sql.SQLException;
 
+/**
+ *
+ */
 public class OperationFacade {
     private static final OperationFacade instance = new OperationFacade();
     private final OperationChain chain = initializeChain();
 
+    /**
+     *
+     */
     private OperationFacade() {
         if (instance != null) throw new InstantiationError("Creating this object is not allowed.");
     }
 
+    /**
+     * @return
+     */
     public static OperationFacade getInstance() {
         return instance;
     }
 
+    /**
+     * @return
+     */
     private OperationChain initializeChain() {
         // Anonymous class for chain head
         class ChainHead extends OperationChain {
@@ -77,6 +89,15 @@ public class OperationFacade {
         return chain;
     }
 
+    /**
+     * @param socket
+     * @param packet
+     * @return
+     * @throws SessionException
+     * @throws SQLException
+     * @throws InvalidTwitterOpException
+     * @throws BanException
+     */
     public Packet fulfillRequest(Socket socket, Packet packet) throws SessionException, SQLException, InvalidTwitterOpException, BanException {
         return chain.perform(socket, packet);
     }

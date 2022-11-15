@@ -3,6 +3,9 @@ package Server.Database;
 import java.sql.*;
 import java.util.*;
 
+/**
+ *
+ */
 public class MySQLDatabase implements Database {
     private static final MySQLDatabase instance = new MySQLDatabase();
 
@@ -10,16 +13,25 @@ public class MySQLDatabase implements Database {
     private String dbUser;
     private String dbPass;
 
+    /**
+     *
+     */
     private MySQLDatabase() {
         if (instance != null) throw new InstantiationError("Creating this object is not allowed.");
     }
 
+    /**
+     * @return
+     */
     public static MySQLDatabase getInstance() {
         return instance;
     }
 
     /* PRIVATE UTILITIES */
 
+    /**
+     * @return
+     */
     private Connection createConnection() {
         Connection result = null;
         Connection connection = null;
@@ -37,6 +49,12 @@ public class MySQLDatabase implements Database {
         return result;
     }
 
+    /**
+     * @param connection
+     * @param queryStr
+     * @param queryParameters
+     * @return
+     */
     private PreparedStatement prepareStatementHelper(Connection connection, String queryStr, List<Object> queryParameters) {
         PreparedStatement statement = null;
 
@@ -69,6 +87,10 @@ public class MySQLDatabase implements Database {
         return statement;
     }
 
+    /**
+     * @param resultSet
+     * @return
+     */
     private ArrayList<ArrayList<String>> convertResultSet(ResultSet resultSet) {
         // Saving query results in a data structure (result set is lost after connection closed)
         ArrayList<ArrayList<String>> rowList = new ArrayList<>();
@@ -95,6 +117,11 @@ public class MySQLDatabase implements Database {
         return rowList;
     }
 
+    /**
+     * @param url
+     * @param user
+     * @param pass
+     */
     public void config(String url, String user, String pass) {
         System.out.println("Url: " + url);
         System.out.println("User: " + user);
@@ -107,6 +134,12 @@ public class MySQLDatabase implements Database {
 
     /* QUERY */
 
+    /**
+     * @param queryStr
+     * @param queryParameters
+     * @return
+     * @throws SQLException
+     */
     @Override
     public Object execQuery(String queryStr, List<Object> queryParameters) throws SQLException {
         // Declaring JDBC resources
@@ -145,6 +178,11 @@ public class MySQLDatabase implements Database {
         return out;
     }
 
+    /**
+     * @param queryStr
+     * @return
+     * @throws SQLException
+     */
     @Override
     public Object execQuery(String queryStr) throws SQLException {
         return execQuery(queryStr, null);
@@ -152,6 +190,12 @@ public class MySQLDatabase implements Database {
 
     /* UPDATE (insert, delete, update) */
 
+    /**
+     * @param queryStr
+     * @param queryParameters
+     * @return
+     * @throws SQLException
+     */
     @Override
     public int execUpdate(String queryStr, List<Object> queryParameters) throws SQLException {
         // Declaring JDBC resources
@@ -181,6 +225,11 @@ public class MySQLDatabase implements Database {
         return updated_no;
     }
 
+    /**
+     * @param queryStr
+     * @return
+     * @throws SQLException
+     */
     @Override
     public int execUpdate(String queryStr) throws SQLException {
         return execUpdate(queryStr, null);

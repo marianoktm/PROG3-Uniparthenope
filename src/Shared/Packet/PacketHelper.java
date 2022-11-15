@@ -8,13 +8,22 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
 
+/**
+ *
+ */
 public class PacketHelper {
     private final Socket clientSocket;
 
+    /**
+     * @param socket
+     */
     public PacketHelper(Socket socket) {
         this.clientSocket = socket;
     }
 
+    /**
+     * @param to_send
+     */
     public void sendPacket(Packet to_send) {
         Gson gson = new Gson();
         String JSONToSend = gson.toJson(to_send);
@@ -28,6 +37,10 @@ public class PacketHelper {
         }
     }
 
+    /**
+     * @return
+     * @throws IOException
+     */
     public Packet getPacket() throws IOException {
         String jsonToGet;
 
