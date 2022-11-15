@@ -14,8 +14,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ */
 public class AdminFeedController extends FeedController {
 
+    /**
+     * @param event
+     */
     @FXML
     @Override
     // Delete User
@@ -27,6 +33,10 @@ public class AdminFeedController extends FeedController {
         deleteUserController.init();
     }
 
+    /**
+     * @param event
+     * @throws IOException
+     */
     @FXML
     @Override
     // Log Out
@@ -45,6 +55,12 @@ public class AdminFeedController extends FeedController {
         StageFacade.closeStageFromBtn(this.btn3);
     }
 
+    /**
+     * @param event
+     * @throws IOException
+     * @throws FetchException
+     * @throws EmptyFieldException
+     */
     @Override
     @FXML
     protected void updateTweetsBtnClick(ActionEvent event) throws IOException, FetchException, EmptyFieldException {
@@ -71,6 +87,9 @@ public class AdminFeedController extends FeedController {
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
         this.hashtagField.setVisible(true);

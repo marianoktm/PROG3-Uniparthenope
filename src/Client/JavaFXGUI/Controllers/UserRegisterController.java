@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ */
 public class UserRegisterController extends ConnectedUIController {
 
     @FXML
@@ -32,6 +35,9 @@ public class UserRegisterController extends ConnectedUIController {
     @FXML
     private TextField usernameField;
 
+    /**
+     * @param event
+     */
     @FXML
     void loginInsteadBtnClick(ActionEvent event) {
         PopUpWrapper.showStage("Login", "Login");
@@ -39,6 +45,11 @@ public class UserRegisterController extends ConnectedUIController {
         StageFacade.closeStageFromBtn(loginInsteadBtn);
     }
 
+    /**
+     * @param event
+     * @throws RegisterException
+     * @throws IOException
+     */
     @FXML
     void submitRegisterBtnClick(ActionEvent event) throws RegisterException, IOException {
         String password = passwordField.getText();
@@ -87,6 +98,12 @@ public class UserRegisterController extends ConnectedUIController {
         }
     }
 
+    /**
+     * @param password
+     * @param username
+     * @param email
+     * @throws RegisterException
+     */
     private void checkData(String password, String username, String email) throws RegisterException {
         if (username.length() > 25) throw new RegisterException("Username must be 25 chars or less!");
         if (password.length() < 8) throw new RegisterException("Password must be at least 8 chars long!");

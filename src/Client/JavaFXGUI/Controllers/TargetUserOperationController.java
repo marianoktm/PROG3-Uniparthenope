@@ -10,6 +10,9 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
+/**
+ *
+ */
 public class TargetUserOperationController extends ConnectedUIController {
     @FXML
     protected Button cancelBtn;
@@ -23,17 +26,28 @@ public class TargetUserOperationController extends ConnectedUIController {
     @FXML
     protected TextField usernameField;
 
+    /**
+     * @param event
+     */
     @FXML
     protected void cancelBtnClick(ActionEvent event) {
         System.out.println("Cancel Button Clicked.");
         StageFacade.closeStageFromBtn(cancelBtn);
     }
 
+    /**
+     * @param event
+     * @throws IOException
+     * @throws FollowException
+     */
     @FXML
     protected void submitBtnClick(ActionEvent event) throws IOException, FollowException {
         System.out.println("Submit Clicked.");
     }
 
+    /**
+     *
+     */
     public void init() {
         System.out.println("Init launched.");
     }

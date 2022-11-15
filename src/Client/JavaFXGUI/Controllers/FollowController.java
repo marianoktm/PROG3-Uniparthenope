@@ -12,8 +12,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ */
 public class FollowController extends TargetUserOperationController {
 
+    /**
+     * @param event
+     * @throws IOException
+     * @throws FollowException
+     */
     @FXML
     @Override
     protected void submitBtnClick(ActionEvent event) throws IOException, FollowException {
@@ -44,6 +52,9 @@ public class FollowController extends TargetUserOperationController {
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
         this.usernameField.setPromptText("Who do you want to follow?");

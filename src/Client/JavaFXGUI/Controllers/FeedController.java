@@ -21,6 +21,9 @@ import java.net.URL;
 import java.util.ArrayList;
 
 
+/**
+ *
+ */
 public class FeedController extends ConnectedUIController {
 
     @FXML
@@ -50,30 +53,55 @@ public class FeedController extends ConnectedUIController {
     @FXML
     protected Button updateTweetsBtn;
 
+    /**
+     *
+     */
     public FeedController() {
         System.out.println("Feed Controller instantiated.");
     }
 
+    /**
+     * @param event
+     */
     @FXML
     protected void btn1Click(ActionEvent event) {
         System.out.println("btn1 Clicked");
     }
 
+    /**
+     * @param event
+     * @throws IOException
+     */
     @FXML
     protected void btn2Click(ActionEvent event) throws IOException {
         System.out.println("btn2 Clicked");
     }
 
+    /**
+     * @param event
+     * @throws IOException
+     * @throws FetchException
+     */
     @FXML
     protected void btn3Click(ActionEvent event) throws IOException, FetchException {
         System.out.println("btn3 Clicked");
     }
 
+    /**
+     * @param event
+     * @throws IOException
+     * @throws FetchException
+     * @throws EmptyFieldException
+     */
     @FXML
     protected void updateTweetsBtnClick(ActionEvent event) throws IOException, FetchException, EmptyFieldException {
         System.out.println("updateTweetsBtn Clicked");
     }
 
+    /**
+     * @param data
+     * @return
+     */
     protected static ArrayList<Tweet> listOfListsToTweetArray(ArrayList<ArrayList<String>> data) {
         ArrayList<Tweet> out = new ArrayList<>();
 
@@ -88,6 +116,10 @@ public class FeedController extends ConnectedUIController {
         return out;
     }
 
+    /**
+     * @param fetchTweetsResult
+     * @throws IOException
+     */
     protected void printTweets(Packet fetchTweetsResult) throws IOException {
         TwitterClientUtils.print2DArrayList((ArrayList<ArrayList<String>>) fetchTweetsResult.data);
 
@@ -108,6 +140,9 @@ public class FeedController extends ConnectedUIController {
         }
     }
 
+    /**
+     *
+     */
     public void init() {
         System.out.println("Init launched.");
     }

@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ */
 public class SubmitTweetController extends ConnectedUIController {
 
     @FXML
@@ -29,11 +32,19 @@ public class SubmitTweetController extends ConnectedUIController {
     @FXML
     private Button submitTweetBtn;
 
+    /**
+     * @param event
+     */
     @FXML
     void cancelBtnClick(ActionEvent event) {
         StageFacade.closeStageFromBtn(cancelBtn);
     }
 
+    /**
+     * @param event
+     * @throws SubmitTweetException
+     * @throws IOException
+     */
     @FXML
     void submitTweetBtnClick(ActionEvent event) throws SubmitTweetException, IOException {
         String hashtag = hashtagField.getText();

@@ -6,8 +6,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
+/**
+ *
+ */
 public class HomeController implements Controller {
 
+    /**
+     *
+     */
     public HomeController() {
         System.out.println("HomeController instantiated.");
     }
@@ -18,6 +24,9 @@ public class HomeController implements Controller {
     @FXML
     private Button registerBtn;
 
+    /**
+     * @param event
+     */
     @FXML
     void loginBtnClick(ActionEvent event) {
         System.out.println("Login Button Clicked.");
@@ -27,6 +36,9 @@ public class HomeController implements Controller {
         StageFacade.closeStageFromBtn(loginBtn);
     }
 
+    /**
+     * @param event
+     */
     @FXML
     void registerBtnClick(ActionEvent event) {
         System.out.println("Register Button Clicked.");

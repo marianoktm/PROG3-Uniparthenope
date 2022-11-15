@@ -11,11 +11,20 @@ import javafx.fxml.FXML;
 
 import java.io.IOException;
 
+/**
+ *
+ */
 public class UserFeedController extends FeedController {
+    /**
+     *
+     */
     public UserFeedController() {
         System.out.println("User Feed Controller Initialized");
     }
 
+    /**
+     * @param event
+     */
     @Override
     @FXML
     // Follow Someone
@@ -27,6 +36,9 @@ public class UserFeedController extends FeedController {
         followController.init();
     }
 
+    /**
+     * @param event
+     */
     @FXML
     @Override
     // Submit Tweet
@@ -35,6 +47,10 @@ public class UserFeedController extends FeedController {
         PopUpWrapper.showStage("SubmitTweet", "Submit Tweet");
     }
 
+    /**
+     * @param event
+     * @throws IOException
+     */
     @FXML
     @Override
     // Log Out
@@ -53,6 +69,11 @@ public class UserFeedController extends FeedController {
         StageFacade.closeStageFromBtn(this.btn3);
     }
 
+    /**
+     * @param event
+     * @throws IOException
+     * @throws FetchException
+     */
     @Override
     @FXML
     protected void updateTweetsBtnClick(ActionEvent event) throws IOException, FetchException {
@@ -72,6 +93,9 @@ public class UserFeedController extends FeedController {
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
         this.hashtagField.setVisible(false);

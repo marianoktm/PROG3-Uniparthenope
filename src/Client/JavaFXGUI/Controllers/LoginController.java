@@ -17,8 +17,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ */
 public class LoginController extends ConnectedUIController {
 
+    /**
+     *
+     */
     public LoginController() {
         System.out.println("UserLoginController instantiated.");
     }
@@ -38,6 +44,11 @@ public class LoginController extends ConnectedUIController {
     @FXML
     private TextField usernameField;
 
+    /**
+     * @param event
+     * @throws IOException
+     * @throws LoginException
+     */
     @FXML
     void submitBtnClick(ActionEvent event) throws IOException, LoginException {
         System.out.println("Submit Login Button Clicked.");
@@ -95,6 +106,9 @@ public class LoginController extends ConnectedUIController {
         }
     }
 
+    /**
+     * @param event
+     */
     @FXML
     void registerInsteadBtnClick(ActionEvent event) {
         PopUpWrapper.showStage("UserRegister", "Register");

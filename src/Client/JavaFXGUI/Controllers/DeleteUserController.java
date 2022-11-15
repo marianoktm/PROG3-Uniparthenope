@@ -12,8 +12,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ */
 public class DeleteUserController extends TargetUserOperationController {
 
+    /**
+     * @param event
+     * @throws FollowException
+     * @throws IOException
+     */
     @FXML
     @Override
     protected void submitBtnClick(ActionEvent event) throws FollowException, IOException {
@@ -43,6 +51,9 @@ public class DeleteUserController extends TargetUserOperationController {
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void init() {
         this.usernameField.setPromptText("Who do you want to delete?");
