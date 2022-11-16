@@ -11,6 +11,13 @@ public class SubmitTweetQuery extends MySQLQueryCommand {
     private final String message;
     private final String uid;
 
+    /**
+     * Sets the data used by the query.
+     * @param hashtag the tweet hashtag
+     * @param message the actual message
+     * @param username the tweet's sender
+     * @throws SQLException if a query cannot be executed.
+     */
     public SubmitTweetQuery(String hashtag, String message, String username) throws SQLException {
         this.hashtag = hashtag;
         this.message = message;
@@ -21,6 +28,11 @@ public class SubmitTweetQuery extends MySQLQueryCommand {
         this.uid = oneResFetch.execute();
     }
 
+    /**
+     * Executes the query.
+     * @return the result of the query.
+     * @throws SQLException if the query cannot be executed.
+     */
     @Override
     public Object execute() throws SQLException {
         String query;

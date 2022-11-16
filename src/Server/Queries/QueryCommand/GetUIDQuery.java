@@ -11,7 +11,11 @@ public class GetUIDQuery extends MySQLQueryCommand{
         this.username = username;
     }
 
-
+    /**
+     * Executes the query.
+     * @return the result of the query.
+     * @throws SQLException if the query cannot be executed.
+     */
     @Override
     public Object execute() throws SQLException {
         String query = queriesHandler.getQuery("get_uid.sql");

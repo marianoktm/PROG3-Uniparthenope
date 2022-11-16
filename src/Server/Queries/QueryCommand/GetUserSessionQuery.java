@@ -8,11 +8,21 @@ public class GetUserSessionQuery extends MySQLQueryCommand {
     private final String uid;
     private final String sessionKey;
 
+    /**
+     * Sets the data used by the query.
+     * @param uid the id of the user
+     * @param sessionKey the session used by the client
+     */
     public GetUserSessionQuery(String uid, String sessionKey) {
         this.uid = uid;
         this.sessionKey = sessionKey;
     }
 
+    /**
+     * Executes the query.
+     * @return the result of the query.
+     * @throws SQLException if the query cannot be executed.
+     */
     @Override
     public Object execute() throws SQLException {
         String query = queriesHandler.getQuery("get_user_session.sql");

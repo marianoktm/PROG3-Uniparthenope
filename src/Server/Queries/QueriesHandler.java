@@ -5,36 +5,36 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- *
+ * A SINGLETON utils class that provides code to get queries strings.
  */
 public class QueriesHandler {
     private static final QueriesHandler instance = new QueriesHandler();
     private String queryDirectory;
 
-    /**
-     *
-     */
     private QueriesHandler() {
         if (instance != null) throw new InstantiationError("Creating this object is not allowed.");
     }
 
     /**
-     * @return
+     * Returns the handler instance.
+     * @return a singleton instance of the class.
      */
     public static QueriesHandler getInstance() {
         return instance;
     }
 
     /**
-     * @param dir
+     * Sets the directory where the queries can be found.
+     * @param dir the queries directory
      */
     public void config(String dir) {
         this.queryDirectory = dir;
     }
 
     /**
-     * @param filename
-     * @return
+     * Searches for a query file (.sql) and returns its text.
+     * @param filename the filename
+     * @return the query String
      */
     public String getQuery(String filename) {
         String query = "";
