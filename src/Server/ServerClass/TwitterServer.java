@@ -3,36 +3,35 @@ package Server.ServerClass;
 import java.net.ServerSocket;
 
 /**
- *
+ * The actual SINGLETON server class of Twitter 2 Server application. Provides method to config, start and stop the server.
  */
 public class TwitterServer {
     private static final TwitterServer instance = new TwitterServer();
     private ServerSocket serverSocket;
     private int port;
 
-    /**
-     *
-     */
     private TwitterServer() {
         if (instance != null) throw new InstantiationError("Creating this object is not allowed");
     }
 
     /**
-     * @return
+     * Returns the singleton instance of the server.
+     * @return a singleton instance of this class.
      */
     public static TwitterServer getInstance() {
         return instance;
     }
 
     /**
-     * @param port
+     * Configs the server port.
+     * @param port the port of the server.
      */
     public void config(int port) {
         this.port = port;
     }
 
     /**
-     *
+     * Starts the server.
      */
     public void start() {
         try {
@@ -44,7 +43,7 @@ public class TwitterServer {
     }
 
     /**
-     *
+     * Stops the server.
      */
     public void stop() {
         try { serverSocket.close(); }

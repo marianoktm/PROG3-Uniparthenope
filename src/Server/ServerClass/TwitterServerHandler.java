@@ -13,14 +13,15 @@ import java.net.Socket;
 import java.sql.SQLException;
 
 /**
- *
+ * A class that handles single thread of Twitter 2 Server.
  */
 class TwitterServerHandler extends Thread {
     private final Socket clientSocket;
     private final PacketHelper packetHelper;
 
     /**
-     * @param socket
+     * Sets the socket that will be used by this handler.
+     * @param socket the socket that will be used for communication.
      */
     public TwitterServerHandler(Socket socket) {
             this.clientSocket = socket;
@@ -28,7 +29,7 @@ class TwitterServerHandler extends Thread {
     }
 
     /**
-     *
+     * Actually runs the thread. If a packet is read it executes the corresponding operation.
      */
     public void run() {
         System.out.println("Connection by client: " + clientSocket.getInetAddress());
@@ -41,22 +42,25 @@ class TwitterServerHandler extends Thread {
     }
 
     /**
-     * @param to_send
+     * Sends a packet through the socket.
+     * @param to_send the packet that will be sent.
      */
     private void sendPacket(Packet to_send) {
         packetHelper.sendPacket(to_send);
     }
 
     /**
-     * @return
-     * @throws IOException
+     * Read a packet from the socket
+     * @return the packet read
+     * @throws IOException if the socket can't be read
      */
     private Packet getPacket() throws IOException {
         return packetHelper.getPacket();
     }
 
     /**
-     * @return
+     * Executes an operation for the client if a packet can be read from the socket.
+     * @return true if a packet is read, false otherwise.
      */
     private boolean operation() {
         Packet packet;
