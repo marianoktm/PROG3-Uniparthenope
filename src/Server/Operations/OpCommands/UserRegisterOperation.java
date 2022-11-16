@@ -17,11 +17,22 @@ import java.util.List;
 public class UserRegisterOperation extends OperationCommand {
     private final Packet packet;
 
+    /**
+     * Sets both the socket and the packet needed in order to execute the operation.
+     * @param socket the socket where packets will be sent or read.
+     * @param packet the packet needed for the operation.
+     */
     public UserRegisterOperation(Socket socket, Packet packet) {
         super(socket);
         this.packet = packet;
     }
 
+    /**
+     * Executes the current command.
+     * @return a response Packet.
+     * @throws InvalidSessionException if the session provided by the client is invalid.
+     * @throws SQLException if a query cannot be executed.
+     */
     @Override
     public Packet execute() throws InvalidSessionException, SQLException {
         Packet response = packet.clone();

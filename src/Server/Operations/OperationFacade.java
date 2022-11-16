@@ -10,21 +10,18 @@ import java.net.Socket;
 import java.sql.SQLException;
 
 /**
- *
+ * A SINGLETON FACADE class for Operations that will be executed on the server. Initializes the OperationChain setting all COR Handlers and provides a method to run through the chain to fulfil a request.
  */
 public class OperationFacade {
     private static final OperationFacade instance = new OperationFacade();
     private final OperationChain chain = initializeChain();
 
-    /**
-     *
-     */
     private OperationFacade() {
         if (instance != null) throw new InstantiationError("Creating this object is not allowed.");
     }
 
     /**
-     * @return
+     * @return the singleton instance of the class.
      */
     public static OperationFacade getInstance() {
         return instance;
@@ -90,13 +87,14 @@ public class OperationFacade {
     }
 
     /**
-     * @param socket
-     * @param packet
-     * @return
-     * @throws SessionException
-     * @throws SQLException
-     * @throws InvalidTwitterOpException
-     * @throws BanException
+     * Fulfils a request in the operation chain.
+     * @param socket the socket where the packet will be read or sent.
+     * @param packet the packet containing all the data needed by operations to be performed.
+     * @return a response packet.
+     * @throws SessionException if the session is invalid.
+     * @throws SQLException if a query can't be executed.
+     * @throws InvalidTwitterOpException if the request code in the packet is invalid.
+     * @throws BanException if a user tries to perform an operation while banned.
      */
     public Packet fulfillRequest(Socket socket, Packet packet) throws SessionException, SQLException, InvalidTwitterOpException, BanException {
         return chain.perform(socket, packet);
