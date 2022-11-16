@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.*;
 
 /**
- *
+ * A SINGLETON class for MySQLDatabase connections and query execution.
  */
 public class MySQLDatabase implements Database {
     private static final MySQLDatabase instance = new MySQLDatabase();
@@ -13,15 +13,13 @@ public class MySQLDatabase implements Database {
     private String dbUser;
     private String dbPass;
 
-    /**
-     *
-     */
     private MySQLDatabase() {
         if (instance != null) throw new InstantiationError("Creating this object is not allowed.");
     }
 
     /**
-     * @return
+     * Returns the singleton instance of the class.
+     * @return the singleton instance of the class.
      */
     public static MySQLDatabase getInstance() {
         return instance;
@@ -30,7 +28,8 @@ public class MySQLDatabase implements Database {
     /* PRIVATE UTILITIES */
 
     /**
-     * @return
+     * Opens a connection to the database.
+     * @return the connection reference.
      */
     private Connection createConnection() {
         Connection result = null;
@@ -50,10 +49,11 @@ public class MySQLDatabase implements Database {
     }
 
     /**
-     * @param connection
-     * @param queryStr
-     * @param queryParameters
-     * @return
+     * Helps the creation of the prepared statement. Assigns the correct type to all references in queryParameters.
+     * @param connection the database connection where the statement will be issued.
+     * @param queryStr the query to be issued.
+     * @param queryParameters the parameters of the query.
+     * @return a ready-to-execute prepared statement.
      */
     private PreparedStatement prepareStatementHelper(Connection connection, String queryStr, List<Object> queryParameters) {
         PreparedStatement statement = null;
@@ -88,8 +88,9 @@ public class MySQLDatabase implements Database {
     }
 
     /**
-     * @param resultSet
-     * @return
+     * Converts a ResultSet as a List of Lists of Strings.
+     * @param resultSet the result set to be converted
+     * @return the result set as a list of lists of Strings
      */
     private ArrayList<ArrayList<String>> convertResultSet(ResultSet resultSet) {
         // Saving query results in a data structure (result set is lost after connection closed)
@@ -118,6 +119,7 @@ public class MySQLDatabase implements Database {
     }
 
     /**
+     * {@inheritDoc}
      * @param url
      * @param user
      * @param pass
@@ -135,10 +137,11 @@ public class MySQLDatabase implements Database {
     /* QUERY */
 
     /**
-     * @param queryStr
-     * @param queryParameters
-     * @return
-     * @throws SQLException
+     * {@inheritDoc}
+     * @param queryStr the query String to be executed with placeholders (?s) for parameters.
+     * @param queryParameters a list of parameters.
+     * @return a list of lists of results. Each row is a tuple. Each col is a tuple's col.
+     * @throws SQLException if the query cannot be executed.
      */
     @Override
     public Object execQuery(String queryStr, List<Object> queryParameters) throws SQLException {
@@ -179,9 +182,10 @@ public class MySQLDatabase implements Database {
     }
 
     /**
-     * @param queryStr
-     * @return
-     * @throws SQLException
+     * {@inheritDoc}
+     * @param queryStr the query String to be executed.
+     * @return a list of lists of results. Each row is a tuple. Each col is a tuple's col.
+     * @throws SQLException if the query cannot be executed.
      */
     @Override
     public Object execQuery(String queryStr) throws SQLException {
@@ -191,10 +195,11 @@ public class MySQLDatabase implements Database {
     /* UPDATE (insert, delete, update) */
 
     /**
-     * @param queryStr
-     * @param queryParameters
-     * @return
-     * @throws SQLException
+     * {@inheritDoc}
+     * @param queryStr the query String to be executed with placeholders (?s) for parameters.
+     * @param queryParameters a list of parameters
+     * @return the number of rows updated
+     * @throws SQLException if the query cannot be executed.
      */
     @Override
     public int execUpdate(String queryStr, List<Object> queryParameters) throws SQLException {
@@ -226,9 +231,10 @@ public class MySQLDatabase implements Database {
     }
 
     /**
-     * @param queryStr
-     * @return
-     * @throws SQLException
+     * {@inheritDoc}
+     * @param queryStr the query String to be executed.
+     * @return the number of rows updated
+     * @throws SQLException if the query cannot be executed.
      */
     @Override
     public int execUpdate(String queryStr) throws SQLException {
