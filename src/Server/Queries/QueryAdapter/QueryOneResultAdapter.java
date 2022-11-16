@@ -6,21 +6,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- *
+ * An ADAPTER class to adapt queries with only one result.
  */
 public class QueryOneResultAdapter {
     private final QueryFetchAdapter fetch;
 
     /**
-     * @param command
+     * Sets the base query command that will be executed and converted.
+     * @param command the MySQLQueryCommand that will be executed and its result converted.
      */
     public QueryOneResultAdapter(MySQLQueryCommand command) {
         this.fetch = new QueryFetchAdapter(command);
     }
 
     /**
-     * @return
-     * @throws SQLException
+     * Executes the command set by the constructor and converts its result.
+     * @return the converted result as a String.
+     * @throws SQLException if the query in the command can't be executed.
      */
     public String execute() throws SQLException {
         ArrayList<ArrayList<String>> out;
