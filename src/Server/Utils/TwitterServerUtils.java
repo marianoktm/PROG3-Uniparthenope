@@ -13,11 +13,12 @@ import java.util.Properties;
 import java.util.UUID;
 
 /**
- *
+ * An utils class that provides useful static methods to the whole Twitter 2 Server Application.
  */
 public class TwitterServerUtils {
     /**
-     * @param list
+     * Prints a 2D array of strings.
+     * @param list the list that will be printed.
      */
     public static void print2DArrayList(ArrayList<ArrayList<String>> list) {
         for (ArrayList<String> row : list) {
@@ -29,7 +30,8 @@ public class TwitterServerUtils {
     }
 
     /**
-     * @param args
+     * Provides configuration help to the main class. Sets Database url, user and pass, server port and query source file path.
+     * @param args a custom path to server_config.properties.
      */
     public static void configHelper(String[] args) {
         // Load config file
@@ -68,7 +70,8 @@ public class TwitterServerUtils {
     }
 
     /**
-     * @return
+     * Generates an unique MD5 session key.
+     * @return the MD5 session key.
      */
     public static String sessionKeyGenerator() {
         UUID random1 = UUID.randomUUID();

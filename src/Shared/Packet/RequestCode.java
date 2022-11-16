@@ -1,7 +1,7 @@
 package Shared.Packet;
 
 /**
- *
+ * Enum that provides request codes to operation that will be performed on the server.
  */
 public enum RequestCode {
     USER_REGISTER,

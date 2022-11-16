@@ -1,7 +1,7 @@
 package Shared.Packet;
 
 /**
- *
+ * A class that provides behavior for the Session.
  */
 public class Session {
     public String session_key;
@@ -9,16 +9,17 @@ public class Session {
     public String uid;
 
     /**
-     *
+     * Creates an unregistered session.
      */
     public Session() {
         this.session_key = this.username = this.uid = null;
     }
 
     /**
-     * @param session_key
-     * @param username
-     * @param uid
+     * Sets session fields.
+     * @param session_key the session unique identifier.
+     * @param username the user username. Null if an admin.
+     * @param uid the user or admin id.
      */
     public Session(String session_key, String username, String uid) {
         this.session_key = session_key;
@@ -27,7 +28,8 @@ public class Session {
     }
 
     /**
-     * @param session
+     * Sets session fields using another session object.
+     * @param session the session that will be copied.
      */
     public Session(Session session) {
         this.session_key = session.session_key;
@@ -36,7 +38,8 @@ public class Session {
     }
 
     /**
-     * @return
+     * Converts the class in a String.
+     * @return the class as a String.
      */
     @Override
     public String toString() {

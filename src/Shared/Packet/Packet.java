@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Packet class that provides packet behavior.
  */
 public class Packet implements Cloneable {
     public RequestCode request;
@@ -16,11 +16,12 @@ public class Packet implements Cloneable {
     public ErrorCode errorCode;
 
     /**
-     * @param request
-     * @param session
-     * @param data
-     * @param isSuccessful
-     * @param errorCode
+     * Sets all the packet fields.
+     * @param request the request that will be executed.
+     * @param session the session that will be used.
+     * @param data the data that will be processed.
+     * @param isSuccessful null if is a sent packet, true if a request is performed on it, false if a request fails.
+     * @param errorCode NONE if is a sent packet, otherwise it tells why the request handling failed.
      */
     public Packet(RequestCode request, Session session, List<?> data, Boolean isSuccessful, ErrorCode errorCode) {
         this.request = request;
@@ -31,7 +32,8 @@ public class Packet implements Cloneable {
     }
 
     /**
-     * @return
+     * Clones the packet.
+     * @return the cloned packet.
      */
     @Override
     public Packet clone() {
@@ -56,7 +58,8 @@ public class Packet implements Cloneable {
     }
 
     /**
-     * @return
+     * Converts the class to a String.
+     * @return the class as a String.
      */
     @Override
     public String toString() {

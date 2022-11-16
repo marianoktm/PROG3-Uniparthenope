@@ -1,7 +1,7 @@
 package Shared.ErrorHandling;
 
 /**
- *
+ * An enum that provides error codes for the whole application.
  */
 public enum ErrorCode {
     NONE,
