@@ -15,12 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Controller for providing behavior to Feed.fxml in case of admin session.
  */
 public class AdminFeedController extends FeedController {
 
     /**
-     * @param event
+     * {@inheritDoc} Opens delete user GUI.
+     * @param event the javafx event arisen by clicking btn1.
      */
     @FXML
     @Override
@@ -34,8 +35,9 @@ public class AdminFeedController extends FeedController {
     }
 
     /**
-     * @param event
-     * @throws IOException
+     * {@inheritDoc} Logs out the application sending a delete session request to the server.
+     * @param event the javafx event arisen by clicking btn2.
+     * @throws IOException if packets can't be read.
      */
     @FXML
     @Override
@@ -56,10 +58,11 @@ public class AdminFeedController extends FeedController {
     }
 
     /**
-     * @param event
-     * @throws IOException
-     * @throws FetchException
-     * @throws EmptyFieldException
+     * {@inheritDoc} It sends a fetch tweets by hashtag request to the server and prints the fetched tweets. The hashtag to search is provided on hashtagField TextField.
+     * @param event the javafx event arisen by clicking updateTweetsBtn.
+     * @throws IOException if packets can't be read.
+     * @throws FetchException if tweets can't be fetched.
+     * @throws EmptyFieldException if hashtag field is empty.
      */
     @Override
     @FXML
@@ -88,7 +91,7 @@ public class AdminFeedController extends FeedController {
     }
 
     /**
-     *
+     * {@inheritDoc}
      */
     @Override
     public void init() {

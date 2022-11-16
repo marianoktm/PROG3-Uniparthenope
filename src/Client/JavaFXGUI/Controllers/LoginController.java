@@ -18,13 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * A controller that provides behavior to Login.fxml. Users can log in using this controller.
  */
 public class LoginController extends ConnectedUIController {
 
-    /**
-     *
-     */
     public LoginController() {
         System.out.println("UserLoginController instantiated.");
     }
@@ -45,9 +42,9 @@ public class LoginController extends ConnectedUIController {
     private TextField usernameField;
 
     /**
-     * @param event
-     * @throws IOException
-     * @throws LoginException
+     * @param event the event arisen by submitBtn. It submits the login data to the server and handles the answer.
+     * @throws IOException if the packet can't be sent or read.
+     * @throws LoginException if the data is somewhat invalid.
      */
     @FXML
     void submitBtnClick(ActionEvent event) throws IOException, LoginException {
@@ -107,6 +104,7 @@ public class LoginController extends ConnectedUIController {
     }
 
     /**
+     * Opens the Registration GUI.
      * @param event
      */
     @FXML

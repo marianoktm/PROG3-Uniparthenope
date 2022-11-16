@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 /**
- *
+ * Utils class for Twitter Client. It contains useful static methods.
  */
 public class TwitterClientUtils {
     /**
-     * @param list
+     * Prints a 2D array of strings.
+     * @param list the 2D array of strings.
      */
     public static void print2DArrayList(ArrayList<ArrayList<String>> list) {
         for (ArrayList<String> row : list) {
@@ -20,8 +21,9 @@ public class TwitterClientUtils {
     }
 
     /**
-     * @param throwable
-     * @return
+     * Finds the root cause of a Throwable.
+     * @param throwable the throwable that was thrown.
+     * @return the root cause of the throwable
      */
     public static Throwable findRootCause(Throwable throwable) {
         Objects.requireNonNull(throwable);

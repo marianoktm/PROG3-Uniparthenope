@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 /**
- *
+ * Controller for Dialog.fxml.
  */
 public class DialogController implements Controller {
     @FXML
@@ -21,6 +21,7 @@ public class DialogController implements Controller {
     }
 
     /**
+     * It handles the behavior of okayBtn. It closes the GUI.
      * @param event
      */
     @FXML
@@ -30,7 +31,8 @@ public class DialogController implements Controller {
     }
 
     /**
-     * @param message
+     * Sets the message of the dialog.
+     * @param message the message that will be shown.
      */
     public void setMessageLabel(String message) {
         this.messageLabel.setText(message);

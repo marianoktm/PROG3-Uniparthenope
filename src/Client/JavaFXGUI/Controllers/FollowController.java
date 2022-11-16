@@ -13,14 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * A controller class that provides behavior to TargetUserOperation.fxml. This controller can be used to provide follow tools to users.
  */
 public class FollowController extends TargetUserOperationController {
 
     /**
-     * @param event
-     * @throws IOException
-     * @throws FollowException
+     * {@inheritDoc} Submits the username that will be followed.
+     * @param event the event arisen by submitBtn.
+     * @throws FollowException if the user does not exist.
+     * @throws IOException if a packet can't be sent or read.
      */
     @FXML
     @Override
@@ -53,7 +54,7 @@ public class FollowController extends TargetUserOperationController {
     }
 
     /**
-     *
+     * {@inheritDoc}
      */
     @Override
     public void init() {

@@ -36,6 +36,7 @@ public class UserRegisterController extends ConnectedUIController {
     private TextField usernameField;
 
     /**
+     * Opens the Login GUI.
      * @param event
      */
     @FXML
@@ -46,9 +47,9 @@ public class UserRegisterController extends ConnectedUIController {
     }
 
     /**
-     * @param event
-     * @throws RegisterException
-     * @throws IOException
+     * @param event the event arisen by submitRegisterBtn. It submits the register data to the server and handles the answer.
+     * @throws RegisterException if the data is somewhat invalid.
+     * @throws IOException if the packet can't be sent or read.
      */
     @FXML
     void submitRegisterBtnClick(ActionEvent event) throws RegisterException, IOException {
@@ -99,10 +100,11 @@ public class UserRegisterController extends ConnectedUIController {
     }
 
     /**
-     * @param password
-     * @param username
-     * @param email
-     * @throws RegisterException
+     * Checks the validity of the data inserted by the user.
+     * @param password the password for the registration
+     * @param username the username for the registration
+     * @param email the email for the registration
+     * @throws RegisterException if the data is somewhat invalid.
      */
     private void checkData(String password, String username, String email) throws RegisterException {
         if (username.length() > 25) throw new RegisterException("Username must be 25 chars or less!");

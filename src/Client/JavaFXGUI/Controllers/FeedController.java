@@ -20,9 +20,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
-
 /**
- *
+ * A general controller for the Feed fxml. It can be extended by subclasses to implement operations on buttons.
  */
 public class FeedController extends ConnectedUIController {
 
@@ -53,15 +52,13 @@ public class FeedController extends ConnectedUIController {
     @FXML
     protected Button updateTweetsBtn;
 
-    /**
-     *
-     */
     public FeedController() {
         System.out.println("Feed Controller instantiated.");
     }
 
     /**
-     * @param event
+     * Executes the event related to btn1.
+     * @param event the javafx event arisen by clicking btn1.
      */
     @FXML
     protected void btn1Click(ActionEvent event) {
@@ -69,8 +66,9 @@ public class FeedController extends ConnectedUIController {
     }
 
     /**
-     * @param event
-     * @throws IOException
+     * Executes the event related to btn2.
+     * @param event the javafx event arisen by clicking btn2.
+     * @throws IOException if packets can't be read.
      */
     @FXML
     protected void btn2Click(ActionEvent event) throws IOException {
@@ -78,20 +76,21 @@ public class FeedController extends ConnectedUIController {
     }
 
     /**
-     * @param event
-     * @throws IOException
-     * @throws FetchException
+     * Executes the event related to btn3.
+     * @param event the javafx event arisen by clicking btn3.
+     * @throws IOException if packets can't be read.
      */
     @FXML
-    protected void btn3Click(ActionEvent event) throws IOException, FetchException {
+    protected void btn3Click(ActionEvent event) throws IOException {
         System.out.println("btn3 Clicked");
     }
 
     /**
-     * @param event
-     * @throws IOException
-     * @throws FetchException
-     * @throws EmptyFieldException
+     * Executes the event related to updateTweetsBtn.
+     * @param event the javafx event arisen by clicking updateTweetsBtn.
+     * @throws IOException if packets can't be read.
+     * @throws FetchException if tweets can't be fetched.
+     * @throws EmptyFieldException if hashtag field is empty.
      */
     @FXML
     protected void updateTweetsBtnClick(ActionEvent event) throws IOException, FetchException, EmptyFieldException {
@@ -99,8 +98,9 @@ public class FeedController extends ConnectedUIController {
     }
 
     /**
-     * @param data
-     * @return
+     * Converts the list of lists provided by the server in an array of tweets.
+     * @param data the data previously read on the socket after a tweet fetch request.
+     * @return an array of Tweet objects.
      */
     protected static ArrayList<Tweet> listOfListsToTweetArray(ArrayList<ArrayList<String>> data) {
         ArrayList<Tweet> out = new ArrayList<>();
@@ -117,8 +117,9 @@ public class FeedController extends ConnectedUIController {
     }
 
     /**
-     * @param fetchTweetsResult
-     * @throws IOException
+     * Prints tweets on screen into the Scrollable VBox used to show them.
+     * @param fetchTweetsResult the packet read on the socket after a tweet fetch request.
+     * @throws IOException if there's an error loading Tweet.fxml
      */
     protected void printTweets(Packet fetchTweetsResult) throws IOException {
         TwitterClientUtils.print2DArrayList((ArrayList<ArrayList<String>>) fetchTweetsResult.data);
@@ -141,7 +142,7 @@ public class FeedController extends ConnectedUIController {
     }
 
     /**
-     *
+     * Initializes controller's fields.
      */
     public void init() {
         System.out.println("Init launched.");

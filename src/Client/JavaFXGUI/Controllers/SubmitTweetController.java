@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Controller for SubmitTweet.fxml
  */
 public class SubmitTweetController extends ConnectedUIController {
 
@@ -33,6 +33,7 @@ public class SubmitTweetController extends ConnectedUIController {
     private Button submitTweetBtn;
 
     /**
+     * Handles the behavior of cancelBtn. It closes the stage.
      * @param event
      */
     @FXML
@@ -41,9 +42,10 @@ public class SubmitTweetController extends ConnectedUIController {
     }
 
     /**
+     * Handles the behavior or submitTweetBtn. Retrieves the data from hashtagField and messageField and sends the tweet to the server.
      * @param event
-     * @throws SubmitTweetException
-     * @throws IOException
+     * @throws SubmitTweetException if the tweet data is somewhat invalid.
+     * @throws IOException if the packet can't be sent.
      */
     @FXML
     void submitTweetBtnClick(ActionEvent event) throws SubmitTweetException, IOException {

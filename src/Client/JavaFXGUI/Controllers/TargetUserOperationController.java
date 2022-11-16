@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 
 /**
- *
+ * A general controller for GUI elements that have a username as input.
  */
 public class TargetUserOperationController extends ConnectedUIController {
     @FXML
@@ -27,7 +27,8 @@ public class TargetUserOperationController extends ConnectedUIController {
     protected TextField usernameField;
 
     /**
-     * @param event
+     * Executes the event related to cancelBtn. Closes the GUI.
+     * @param event the event arisen by cancelBtn.
      */
     @FXML
     protected void cancelBtnClick(ActionEvent event) {
@@ -36,7 +37,8 @@ public class TargetUserOperationController extends ConnectedUIController {
     }
 
     /**
-     * @param event
+     * Executes the event related to submitBtn.
+     * @param event the event arisen by submitBtn.
      * @throws IOException
      * @throws FollowException
      */
@@ -46,7 +48,7 @@ public class TargetUserOperationController extends ConnectedUIController {
     }
 
     /**
-     *
+     * Initializes controller's fields.
      */
     public void init() {
         System.out.println("Init launched.");

@@ -12,18 +12,17 @@ import javafx.fxml.FXML;
 import java.io.IOException;
 
 /**
- *
+ * Controller for providing behavior to Feed.fxml in case of user session.
  */
 public class UserFeedController extends FeedController {
-    /**
-     *
-     */
+
     public UserFeedController() {
         System.out.println("User Feed Controller Initialized");
     }
 
     /**
-     * @param event
+     * {@inheritDoc} Opens follow someone GUI.
+     * @param event the javafx event arisen by clicking btn1.
      */
     @Override
     @FXML
@@ -37,7 +36,8 @@ public class UserFeedController extends FeedController {
     }
 
     /**
-     * @param event
+     * {@inheritDoc} Opens Submit Tweet GUI.
+     * @param event the javafx event arisen by clicking btn2.
      */
     @FXML
     @Override
@@ -48,7 +48,8 @@ public class UserFeedController extends FeedController {
     }
 
     /**
-     * @param event
+     * {@inheritDoc} Logs out the application sending a delete session request to the server.
+     * @param event the javafx event arisen by clicking btn3.
      * @throws IOException
      */
     @FXML
@@ -70,7 +71,8 @@ public class UserFeedController extends FeedController {
     }
 
     /**
-     * @param event
+     * {@inheritDoc} It sends a fetch tweets by followed request to the server and prints the fetched tweets.
+     * @param event the javafx event arisen by clicking updateTweetsBtn.
      * @throws IOException
      * @throws FetchException
      */
@@ -94,7 +96,7 @@ public class UserFeedController extends FeedController {
     }
 
     /**
-     *
+     * {@inheritDoc}
      */
     @Override
     public void init() {

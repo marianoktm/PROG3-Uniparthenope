@@ -7,13 +7,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 /**
- *
+ * Home controller. Users can decide to log in or register on the application.
  */
 public class HomeController implements Controller {
 
-    /**
-     *
-     */
     public HomeController() {
         System.out.println("HomeController instantiated.");
     }
@@ -25,7 +22,8 @@ public class HomeController implements Controller {
     private Button registerBtn;
 
     /**
-     * @param event
+     * Opens the Login GUI.
+     * @param event the event arisen by loginBtn.
      */
     @FXML
     void loginBtnClick(ActionEvent event) {
@@ -37,7 +35,8 @@ public class HomeController implements Controller {
     }
 
     /**
-     * @param event
+     * Opens the Registration GUI.
+     * @param event the event arisen by registerBtn.
      */
     @FXML
     void registerBtnClick(ActionEvent event) {

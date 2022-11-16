@@ -1,7 +1,7 @@
 package Client.JavaFXGUI.GUIObjects;
 
 /**
- *
+ * Tweet class for holding Tweet information. It acts as a record, so it does not have setters and getters.
  */
 public final class Tweet {
     public String username;
@@ -10,10 +10,11 @@ public final class Tweet {
     public String datetime;
 
     /**
-     * @param username
-     * @param hashtag
-     * @param message
-     * @param datetime
+     * Constructor for Tweet class. It sets username, hashtag, message and date of the tweet.
+     * @param username the tweet sender's username
+     * @param hashtag the tweet's hashtag
+     * @param message the actual tweet
+     * @param datetime tweet post date
      */
     public Tweet(String username, String hashtag, String message, String datetime) {
         this.username = username;
@@ -23,7 +24,8 @@ public final class Tweet {
     }
 
     /**
-     * @return
+     * Converts the class to a String.
+     * @return the class as a String.
      */
     @Override
     public String toString() {
