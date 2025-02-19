@@ -1,1 +1,0 @@
-SELECT username, hashtag, message, post_date, tweets.uid, tweet_id FROM twitterdb.tweets join user u on u.uid = tweets.uid WHERE hashtag = ? ORDER BY post_date DESC LIMIT ?

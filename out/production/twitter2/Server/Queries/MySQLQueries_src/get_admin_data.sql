@@ -1,1 +1,0 @@
-SELECT * FROM twitterdb.admins WHERE admin_id = ?
